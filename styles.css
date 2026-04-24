@@ -2936,15 +2936,55 @@ section {
     gap: 0.875rem;
 }
 .agency-logo {
-    width: 44px;
-    height: 44px;
+    width: 52px;
+    height: 52px;
     flex-shrink: 0;
     fill: var(--paper);
-    filter: drop-shadow(0 0 16px rgba(253, 253, 253, 0.2));
-    transition: transform 400ms var(--ease);
+    filter:
+        drop-shadow(0 0 12px rgba(30, 159, 217, 0.35))
+        drop-shadow(0 0 18px rgba(230, 57, 70, 0.2));
+    transition: filter 500ms var(--ease);
+    overflow: visible;
+    animation: agencyLogoGlow 4s ease-in-out infinite;
+}
+
+/* Rotation continue du groupe de blades */
+.agency-logo-spin {
+    transform-origin: 100px 115px;
+    transform-box: fill-box;
+    animation: agencyLogoSpin 14s linear infinite;
+}
+
+@keyframes agencyLogoSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes agencyLogoGlow {
+    0%, 100% {
+        filter:
+            drop-shadow(0 0 12px rgba(30, 159, 217, 0.35))
+            drop-shadow(0 0 18px rgba(230, 57, 70, 0.2));
+    }
+    50% {
+        filter:
+            drop-shadow(0 0 20px rgba(30, 159, 217, 0.55))
+            drop-shadow(0 0 28px rgba(230, 57, 70, 0.4));
+    }
+}
+
+.agency-card:hover .agency-logo-spin {
+    animation-duration: 6s;
 }
 .agency-card:hover .agency-logo {
-    transform: rotate(-8deg) scale(1.06);
+    filter:
+        drop-shadow(0 0 24px rgba(30, 159, 217, 0.7))
+        drop-shadow(0 0 36px rgba(230, 57, 70, 0.5));
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .agency-logo-spin { animation: none; }
+    .agency-logo { animation: none; }
 }
 .agency-brand > div {
     display: flex;

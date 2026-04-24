@@ -1,0 +1,27 @@
+{
+    "name": "Laurent Agnese Électricité Générale",
+    "short_name": "Agnese Électricité",
+    "description": "Artisan électricien à Marcillat-en-Combraille (03). Rénovation, dépannage, bornes de recharge, tableaux, groupes électrogènes.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#FDFDFD",
+    "theme_color": "#1E9FD9",
+    "lang": "fr",
+    "dir": "ltr",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='42' fill='%231E9FD9'/%3E%3Cpath d='M96 34 L58 104 L88 104 L72 158 L138 80 L104 80 Z' fill='%23E63946'/%3E%3C/svg%3E",
+            "sizes": "192x192",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%231E9FD9'/%3E%3Cpath d='M256 90 L154 278 L234 278 L192 422 L368 214 L276 214 Z' fill='%23E63946'/%3E%3C/svg%3E",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["business", "local services", "home improvement"]
+}

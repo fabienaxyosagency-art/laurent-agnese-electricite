@@ -1,0 +1,46 @@
+# ==============================================
+# .gitignore — Laurent Agnese Électricité Générale
+# ==============================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Éditeurs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependencies (si ajout futur)
+node_modules/
+package-lock.json
+
+# Environnement
+.env
+.env.local
+.env.*.local
+
+# Build (si ajout futur)
+dist/
+build/
+.next/
+.cache/
+.vercel/
+
+# Fichiers temporaires
+*.tmp
+*.bak
+Thumbs.db
+
+# Claude / AI tools
+.claude/
+.aider*
+CLAUDE.md

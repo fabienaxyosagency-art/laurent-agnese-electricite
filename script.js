@@ -251,16 +251,133 @@
         }, { passive: true });
     }
 
-    /* ========== MARQUEE DRAG-TO-SCROLL (optionnel sur desktop) ========== */
+    /* ========== MARQUEE AVIS — auto-scroll + drag/swipe manuel ========== */
     const marqueeTrack = document.querySelector('[data-marquee]');
     if (marqueeTrack) {
-        let isDown = false, startX = 0, scrollLeft = 0, wrapper = marqueeTrack.parentElement;
+        const wrapper = marqueeTrack.parentElement;
+        const cards = Array.from(marqueeTrack.children);
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        wrapper.addEventListener('mouseenter', () => {
-            marqueeTrack.style.animationPlayState = 'paused';
+        // Duplique le set pour boucle infinie (si pas déjà fait dans le HTML)
+        const originalCount = cards.length;
+        cards.forEach(card => {
+            const clone = card.cloneNode(true);
+            clone.setAttribute('aria-hidden', 'true');
+            marqueeTrack.appendChild(clone);
         });
+
+        let halfWidth = 0;
+        const computeHalf = () => {
+            // Largeur de la moitié = somme des cards originales + leurs gaps
+            const gap = parseFloat(getComputedStyle(marqueeTrack).gap) || 20;
+            halfWidth = Array.from(marqueeTrack.children)
+                .slice(0, originalCount)
+                .reduce((sum, el) => sum + el.offsetWidth + gap, 0);
+        };
+        computeHalf();
+        window.addEventListener('resize', computeHalf, { passive: true });
+
+        let paused = reducedMotion;
+        let resumeTimer = null;
+        let scrollAccum = 0;
+        const SPEED = 0.6; // px/frame ≈ 36 px/s à 60 Hz
+        const RESUME_DELAY = 1800; // reprise auto 1,8 s après dernière interaction
+
+        const pauseAuto = () => {
+            paused = true;
+            clearTimeout(resumeTimer);
+        };
+        const scheduleResume = () => {
+            if (reducedMotion) return;
+            clearTimeout(resumeTimer);
+            resumeTimer = setTimeout(() => { paused = false; }, RESUME_DELAY);
+        };
+
+        // Boucle d'auto-scroll
+        // (accumulateur nécessaire car scrollLeft est arrondi en entiers par le navigateur)
+        const tick = () => {
+            if (halfWidth > 0) {
+                if (!paused) {
+                    scrollAccum += SPEED;
+                    if (scrollAccum >= 1) {
+                        const inc = Math.floor(scrollAccum);
+                        wrapper.scrollLeft += inc;
+                        scrollAccum -= inc;
+                    }
+                }
+                // Boucle infinie : rebobine quand on dépasse le set original
+                if (wrapper.scrollLeft >= halfWidth) {
+                    wrapper.scrollLeft -= halfWidth;
+                } else if (wrapper.scrollLeft < 0) {
+                    wrapper.scrollLeft += halfWidth;
+                }
+            }
+            requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+
+        // === Hover desktop (pause) ===
+        wrapper.addEventListener('mouseenter', pauseAuto);
         wrapper.addEventListener('mouseleave', () => {
-            if (!isDown) marqueeTrack.style.animationPlayState = 'running';
+            if (!isDragging) scheduleResume();
+        });
+
+        // === Drag souris (desktop) ===
+        let isDragging = false;
+        let startX = 0;
+        let startScroll = 0;
+
+        wrapper.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.pageX;
+            startScroll = wrapper.scrollLeft;
+            wrapper.classList.add('is-grabbing');
+            pauseAuto();
+            e.preventDefault();
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const delta = e.pageX - startX;
+            wrapper.scrollLeft = startScroll - delta * 1.4; // multiplicateur pour un drag plus rapide
+        }, { passive: true });
+
+        window.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                wrapper.classList.remove('is-grabbing');
+                scheduleResume();
+            }
+        });
+
+        // === Touch (mobile) — scroll natif, pause pendant + reprise après ===
+        wrapper.addEventListener('touchstart', pauseAuto, { passive: true });
+        wrapper.addEventListener('touchend', scheduleResume, { passive: true });
+        wrapper.addEventListener('touchcancel', scheduleResume, { passive: true });
+
+        // === Wheel horizontal (trackpad) — pause + reprise ===
+        let wheelTimer = null;
+        wrapper.addEventListener('wheel', (e) => {
+            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+                pauseAuto();
+                clearTimeout(wheelTimer);
+                wheelTimer = setTimeout(scheduleResume, 200);
+            }
+        }, { passive: true });
+
+        // === Accessibilité clavier ===
+        wrapper.setAttribute('tabindex', '0');
+        wrapper.setAttribute('role', 'region');
+        wrapper.setAttribute('aria-label', 'Avis clients — défilement automatique, scrollable au toucher ou à la souris');
+        wrapper.addEventListener('focus', pauseAuto);
+        wrapper.addEventListener('blur', scheduleResume);
+        wrapper.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                pauseAuto();
+                wrapper.scrollLeft += (e.key === 'ArrowRight' ? 1 : -1) * 200;
+                scheduleResume();
+                e.preventDefault();
+            }
         });
     }
 
@@ -305,12 +422,19 @@
     const serviceCards = document.querySelectorAll('.service-mini');
     if (serviceCards.length) {
         const bgMap = [
-            { keyword: 'Rénovation',        url: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=900&q=80' },
-            { keyword: 'Dépannage',         url: 'https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?auto=format&fit=crop&w=900&q=80' },
-            { keyword: 'Remise aux normes', url: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=900&q=80' },
+            // Rénovation : câbles avec connecteurs WAGO dans une saignée murale en rénovation
+            { keyword: 'Rénovation',        url: 'https://images.unsplash.com/photo-1557516300-46e218a6961f?auto=format&fit=crop&w=900&q=80' },
+            // Dépannage : électricien en EPI mesurant la tension au multimètre sur tableau
+            { keyword: 'Dépannage',         url: 'https://images.unsplash.com/photo-1615774925655-a0e97fc85c14?auto=format&fit=crop&w=900&q=80' },
+            // Remise aux normes : câblage chaotique non conforme, démontre le besoin de remise aux normes
+            { keyword: 'Remise aux normes', url: 'https://images.unsplash.com/photo-1601462904263-f2fa0c851cb9?auto=format&fit=crop&w=900&q=80' },
+            // Bornes IRVE : pistolet de recharge VE branché sur véhicule
             { keyword: 'Bornes',            url: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=900&q=80' },
-            { keyword: 'tableau',           url: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=900&q=80' },
-            { keyword: 'électrogène',       url: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=900&q=80' },
+            // Création de tableau : tableau ABB neuf avec câblage propre et organisé
+            { keyword: 'tableau',           url: 'https://images.unsplash.com/photo-1576446470246-499c738d1c8e?auto=format&fit=crop&w=900&q=80' },
+            // Groupes électrogènes : moteur générateur bleu industriel en service
+            { keyword: 'électrogène',       url: 'https://images.unsplash.com/photo-1637296001293-43ec1ac4e5ed?auto=format&fit=crop&w=900&q=80' },
+            // Luminaires : suspension design grise sur fond bleu canard, ambiance soignée
             { keyword: 'Luminaires',        url: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=900&q=80' },
         ];
 

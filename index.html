@@ -1387,159 +1387,151 @@
         <div class="container">
             <div class="section-head reveal">
                 <span class="eyebrow">Chantiers récents</span>
-                <h2>5 réalisations, <em>5 savoir-faire concrets.</em></h2>
-                <p>Chaque chantier ci-dessous a été réalisé par Laurent. Photos vraies, pas de catalogue.</p>
+                <h2>5 chantiers récents, <em>5 savoir-faire concrets.</em></h2>
+                <p>Glissez la barre du tableau pour voir l'avant/après · cliquez n'importe quelle photo pour les détails techniques.</p>
             </div>
 
-            <div class="chantiers-grid">
-
-                <!-- ===== CHANTIER 1 — Rénovation tableau (FEATURED avec slider avant/après) ===== -->
-                <article class="chantier-card chantier-featured reveal" data-chantier="tableau">
-                    <div class="chantier-media chantier-ba" data-before-after>
-                        <picture class="chantier-ba-img chantier-ba-after">
-                            <source type="image/webp" srcset="assets/chantiers/tableau-apres.webp">
-                            <img src="assets/chantiers/tableau-apres.jpg" alt="Tableau électrique neuf installé par Laurent Agnese — circuits différentiels modernes, étiquetage clair" loading="lazy" width="1200" height="1600">
+            <!-- ===== CHANTIER FEATURED — Avant/Après tableau (impact maximum, conservé) ===== -->
+            <article class="chantier-featured reveal" data-chantier="tableau">
+                <div class="chantier-ba" data-before-after>
+                    <picture class="chantier-ba-img chantier-ba-after">
+                        <source type="image/webp" srcset="assets/chantiers/tableau-apres.webp">
+                        <img src="assets/chantiers/tableau-apres.jpg" alt="Tableau électrique neuf installé par Laurent Agnese — circuits différentiels modernes, étiquetage clair" loading="lazy" width="1200" height="1600">
+                    </picture>
+                    <div class="chantier-ba-clip">
+                        <picture class="chantier-ba-img chantier-ba-before">
+                            <source type="image/webp" srcset="assets/chantiers/tableau-avant-1.webp">
+                            <img src="assets/chantiers/tableau-avant-1.jpg" alt="Ancien tableau électrique avant rénovation — installation vétuste, fusibles obsolètes, câblage non conforme" loading="lazy" width="1200" height="1600">
                         </picture>
-                        <div class="chantier-ba-clip">
-                            <picture class="chantier-ba-img chantier-ba-before">
-                                <source type="image/webp" srcset="assets/chantiers/tableau-avant-1.webp">
-                                <img src="assets/chantiers/tableau-avant-1.jpg" alt="Ancien tableau électrique avant rénovation — installation vétuste, fusibles obsolètes, câblage non conforme" loading="lazy" width="1200" height="1600">
-                            </picture>
-                        </div>
-                        <input type="range" min="0" max="100" value="50" class="chantier-ba-slider" aria-label="Glissez pour comparer avant et après" data-ba-input>
-                        <span class="chantier-ba-handle" aria-hidden="true">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 15 12 9 6"/></svg>
-                        </span>
-                        <span class="chantier-ba-label chantier-ba-label-before">Avant</span>
-                        <span class="chantier-ba-label chantier-ba-label-after">Après</span>
                     </div>
-                    <div class="chantier-content">
-                        <span class="chantier-cat">Rénovation tableau · Combraille</span>
-                        <h3>Mise aux normes complète d'un tableau électrique vétuste</h3>
-                        <p>Maison ancienne avec ancien tableau Branchement Abonné, fusibles à porcelaine, câblage déclassé. Dépose intégrale, percement et préparation de niche, pose d'un tableau modulaire 2 rangées avec différentiels 30 mA, parafoudre et étiquetage clair pièce par pièce.</p>
-                        <ul class="chantier-tech">
-                            <li>Dépose totale de l'ancien tableau Branchement Abonné</li>
-                            <li>Tableau neuf 2 rangées, différentiels haute sensibilité</li>
-                            <li>Conformité <strong>NF C 15-100</strong> · attestation Consuel</li>
-                            <li>Étiquetage et schéma remis au client</li>
-                        </ul>
-                    </div>
-                </article>
+                    <input type="range" min="0" max="100" value="50" class="chantier-ba-slider" aria-label="Glissez pour comparer avant et après" data-ba-input>
+                    <span class="chantier-ba-handle" aria-hidden="true">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/><polyline points="9 18 15 12 9 6"/></svg>
+                    </span>
+                    <span class="chantier-ba-label chantier-ba-label-before">Avant</span>
+                    <span class="chantier-ba-label chantier-ba-label-after">Après</span>
+                </div>
+                <div class="chantier-featured-overlay">
+                    <span class="chantier-featured-cat">Rénovation tableau · Combraille</span>
+                    <h3>Mise aux normes d'un tableau électrique vétuste</h3>
+                    <p>Maison ancienne avec ancien tableau Branchement Abonné. Dépose intégrale, pose d'un tableau modulaire 2 rangées avec différentiels 30 mA. Conforme NF C 15-100, attestation Consuel obtenue.</p>
+                </div>
+            </article>
 
-                <!-- ===== CHANTIER 2 — IRVE Schneider EVlink ===== -->
-                <article class="chantier-card reveal" data-chantier="evlink">
-                    <div class="chantier-media chantier-carousel" data-carousel>
-                        <picture class="chantier-photo" data-photo-active>
+            <!-- ===== RUBAN SCROLLANT — Photos chantiers (cliquables) ===== -->
+            <div class="chantiers-ribbon-wrapper reveal">
+                <div class="chantiers-ribbon" data-chantiers-ribbon>
+                    <!-- Set 1 — original -->
+                    <button type="button" class="chantier-tile" data-chantier-id="evlink" aria-label="Détails du chantier Borne IRVE Schneider EVlink">
+                        <picture>
                             <source type="image/webp" srcset="assets/chantiers/evlink-finie.webp">
-                            <img src="assets/chantiers/evlink-finie.jpg" alt="Borne de recharge Schneider Electric EVlink installée en extérieur — façade fermée, prête à charger" loading="lazy" width="1200" height="1600">
+                            <img src="assets/chantiers/evlink-finie.jpg" alt="Borne de recharge Schneider EVlink — face extérieure" loading="lazy">
                         </picture>
-                        <picture class="chantier-photo">
+                        <span class="chantier-tile-overlay">
+                            <span class="chantier-tile-cat">Borne IRVE</span>
+                            <strong>Schneider EVlink</strong>
+                        </span>
+                    </button>
+
+                    <button type="button" class="chantier-tile" data-chantier-id="evlink" aria-label="Détails — vue intérieure de la borne EVlink">
+                        <picture>
                             <source type="image/webp" srcset="assets/chantiers/evlink-interieur.webp">
-                            <img src="assets/chantiers/evlink-interieur.jpg" alt="Intérieur de la borne EVlink — disjoncteurs, contacteur, raccordement terre, câblage soigné par Laurent Agnese certifié IRVE" loading="lazy" width="1200" height="1600">
+                            <img src="assets/chantiers/evlink-interieur.jpg" alt="Intérieur câblage de la borne Schneider EVlink" loading="lazy">
                         </picture>
-                        <div class="chantier-carousel-dots">
-                            <button class="dot active" data-photo="0" type="button" aria-label="Photo 1 — borne fermée"></button>
-                            <button class="dot" data-photo="1" type="button" aria-label="Photo 2 — intérieur"></button>
-                        </div>
-                        <span class="chantier-badge">IRVE certifié</span>
-                    </div>
-                    <div class="chantier-content">
-                        <span class="chantier-cat">Borne de recharge IRVE · Combraille</span>
-                        <h3>Schneider Electric EVlink — pose extérieure</h3>
-                        <p>Wallbox 7 kW Schneider EVlink en pose murale extérieure, raccordement dédié protégé, mise en service complète. Le client charge désormais son véhicule électrique chaque nuit sur prise dédiée 32 A monophasée.</p>
-                        <ul class="chantier-tech">
-                            <li>Wallbox <strong>7 kW</strong> Schneider Electric EVlink</li>
-                            <li>Disjoncteur dédié 32 A + différentiel type A</li>
-                            <li>Liaison équipotentielle de terre conforme IRVE</li>
-                            <li>Test mise en service + accompagnement prime ADVENIR</li>
-                        </ul>
-                    </div>
-                </article>
+                        <span class="chantier-tile-overlay">
+                            <span class="chantier-tile-cat">Câblage IRVE</span>
+                            <strong>Disjoncteur 32 A dédié</strong>
+                        </span>
+                    </button>
 
-                <!-- ===== CHANTIER 3 — IRVE Hager ===== -->
-                <article class="chantier-card reveal" data-chantier="hager">
-                    <div class="chantier-media">
-                        <picture class="chantier-photo" data-photo-active>
+                    <button type="button" class="chantier-tile" data-chantier-id="hager" aria-label="Détails du chantier Borne IRVE Hager Witty">
+                        <picture>
                             <source type="image/webp" srcset="assets/chantiers/hager-led.webp">
-                            <img src="assets/chantiers/hager-led.jpg" alt="Borne de recharge Hager Witty installée — LED verte allumée signalant la disponibilité, pose intérieure protégée" loading="lazy" width="1200" height="1600">
+                            <img src="assets/chantiers/hager-led.jpg" alt="Borne de recharge Hager Witty avec LED verte" loading="lazy">
                         </picture>
-                        <span class="chantier-badge">IRVE certifié</span>
-                    </div>
-                    <div class="chantier-content">
-                        <span class="chantier-cat">Borne de recharge IRVE · Combraille</span>
-                        <h3>Hager Witty — pose intérieure abritée</h3>
-                        <p>Borne Hager Witty installée dans abri couvert, idéale pour propriétaires de garage ou car-port. Voyant LED vert : prête à charger, intervention rapide, pose propre.</p>
-                        <ul class="chantier-tech">
-                            <li>Wallbox Hager Witty <strong>7 / 22 kW</strong></li>
-                            <li>Pose abritée — protection IP54</li>
-                            <li>Mise en service + démonstration utilisateur</li>
-                        </ul>
-                    </div>
-                </article>
+                        <span class="chantier-tile-overlay">
+                            <span class="chantier-tile-cat">Borne IRVE</span>
+                            <strong>Hager Witty</strong>
+                        </span>
+                    </button>
 
-                <!-- ===== CHANTIER 4 — Motorisation portail Nice ===== -->
-                <article class="chantier-card reveal" data-chantier="portail">
-                    <div class="chantier-media chantier-carousel" data-carousel>
-                        <picture class="chantier-photo" data-photo-active>
+                    <button type="button" class="chantier-tile" data-chantier-id="portail" aria-label="Détails du chantier portail motorisé Nice">
+                        <picture>
                             <source type="image/webp" srcset="assets/chantiers/portail-resultat.webp">
-                            <img src="assets/chantiers/portail-resultat.jpg" alt="Portail double battant gris anthracite motorisé Nice installé par Laurent Agnese — vue d'ensemble depuis l'allée" loading="lazy" width="1600" height="1200">
+                            <img src="assets/chantiers/portail-resultat.jpg" alt="Portail double battant motorisé Nice" loading="lazy">
                         </picture>
-                        <picture class="chantier-photo">
+                        <span class="chantier-tile-overlay">
+                            <span class="chantier-tile-cat">Motorisation</span>
+                            <strong>Portail Nice solaire</strong>
+                        </span>
+                    </button>
+
+                    <button type="button" class="chantier-tile" data-chantier-id="portail" aria-label="Détails — système solaire du portail">
+                        <picture>
                             <source type="image/webp" srcset="assets/chantiers/portail-systeme.webp">
-                            <img src="assets/chantiers/portail-systeme.jpg" alt="Détail technique de la motorisation Nice — panneau solaire, boîtier de commande, alimentation autonome sans tranchée" loading="lazy" width="1200" height="1600">
+                            <img src="assets/chantiers/portail-systeme.jpg" alt="Détail technique du système solaire Nice" loading="lazy">
                         </picture>
-                        <div class="chantier-carousel-dots">
-                            <button class="dot active" data-photo="0" type="button" aria-label="Photo 1 — portail fini"></button>
-                            <button class="dot" data-photo="1" type="button" aria-label="Photo 2 — détail système"></button>
-                        </div>
-                    </div>
-                    <div class="chantier-content">
-                        <span class="chantier-cat">Motorisation portail · Combraille</span>
-                        <h3>Portail double battant motorisé Nice — alimentation solaire</h3>
-                        <p>Solution autonome sans tranchée : motorisation Nice double battant alimentée par panneau solaire dédié. Idéal pour propriétés rurales sans tirage électrique facile vers le portail. Mise en service + télécommandes programmées.</p>
-                        <ul class="chantier-tech">
-                            <li>Motorisation <strong>Nice</strong> double battant</li>
-                            <li>Alimentation par <strong>panneau solaire</strong> + batterie tampon</li>
-                            <li>Aucune tranchée requise — installation rapide</li>
-                            <li>Programmation télécommandes + photocellules sécurité</li>
-                        </ul>
-                    </div>
-                </article>
+                        <span class="chantier-tile-overlay">
+                            <span class="chantier-tile-cat">Solaire autonome</span>
+                            <strong>Sans tranchée</strong>
+                        </span>
+                    </button>
 
-                <!-- ===== CHANTIER 5 — Groupe électrogène commutable ===== -->
-                <article class="chantier-card reveal" data-chantier="groupe">
-                    <div class="chantier-media chantier-carousel" data-carousel>
-                        <picture class="chantier-photo" data-photo-active>
+                    <button type="button" class="chantier-tile" data-chantier-id="groupe" aria-label="Détails du chantier inverseur de source">
+                        <picture>
                             <source type="image/webp" srcset="assets/chantiers/groupe-inverseur.webp">
-                            <img src="assets/chantiers/groupe-inverseur.jpg" alt="Inverseur de source manuel commutable — sélecteur Habitation / Groupe électrogène posé par Laurent Agnese, sécurité maximale en cas de coupure réseau" loading="lazy" width="1200" height="1600">
+                            <img src="assets/chantiers/groupe-inverseur.jpg" alt="Inverseur de source manuel Habitation/Groupe" loading="lazy">
                         </picture>
-                        <picture class="chantier-photo">
-                            <source type="image/webp" srcset="assets/chantiers/groupe-electrogene.webp">
-                            <img src="assets/chantiers/groupe-electrogene.jpg" alt="Groupe électrogène MW Tools en service — sortie 32 A bleue connectée au tableau de l'habitation via inverseur de source" loading="lazy" width="1200" height="1600">
-                        </picture>
-                        <div class="chantier-carousel-dots">
-                            <button class="dot active" data-photo="0" type="button" aria-label="Photo 1 — inverseur de source"></button>
-                            <button class="dot" data-photo="1" type="button" aria-label="Photo 2 — groupe en service"></button>
-                        </div>
-                    </div>
-                    <div class="chantier-content">
-                        <span class="chantier-cat">Groupe électrogène commutable · Combraille</span>
-                        <h3>Inverseur de source manuel — habitation / groupe</h3>
-                        <p>Coupure secteur fréquente en milieu rural ? Pose d'un inverseur de source manuel à 2 positions (« I Habitation » / « II Groupe ») permettant de basculer en sécurité l'alimentation de la maison vers un groupe électrogène mobile en cas de panne EDF. Plus de rallonges, plus de risque, sécurité totale.</p>
-                        <ul class="chantier-tech">
-                            <li>Inverseur de source <strong>2 positions</strong> verrouillé mécaniquement</li>
-                            <li>Câblage dédié vers prise extérieure 32 A pour le groupe</li>
-                            <li>Compatible groupes <strong>3 à 6 kW</strong> (résidentiel)</li>
-                            <li>Audit consommation prioritaire avant pose</li>
-                        </ul>
-                    </div>
-                </article>
+                        <span class="chantier-tile-overlay">
+                            <span class="chantier-tile-cat">Sécurité coupure</span>
+                            <strong>Inverseur de source</strong>
+                        </span>
+                    </button>
 
+                    <button type="button" class="chantier-tile" data-chantier-id="groupe" aria-label="Détails — groupe électrogène en service">
+                        <picture>
+                            <source type="image/webp" srcset="assets/chantiers/groupe-electrogene.webp">
+                            <img src="assets/chantiers/groupe-electrogene.jpg" alt="Groupe électrogène MW Tools en service" loading="lazy">
+                        </picture>
+                        <span class="chantier-tile-overlay">
+                            <span class="chantier-tile-cat">Groupe électrogène</span>
+                            <strong>Sortie 32 A</strong>
+                        </span>
+                    </button>
+
+                    <button type="button" class="chantier-tile" data-chantier-id="tableau" aria-label="Détails du chantier rénovation tableau électrique">
+                        <picture>
+                            <source type="image/webp" srcset="assets/chantiers/tableau-avant-2.webp">
+                            <img src="assets/chantiers/tableau-avant-2.jpg" alt="Niche tableau pendant le chantier de rénovation" loading="lazy">
+                        </picture>
+                        <span class="chantier-tile-overlay">
+                            <span class="chantier-tile-cat">Process chantier</span>
+                            <strong>Préparation niche</strong>
+                        </span>
+                    </button>
+                </div>
             </div>
 
             <div class="gallery-cta reveal">
                 <p>Un projet similaire en tête&nbsp;?</p>
                 <a href="#devis" class="btn btn-primary">Parlons-en — devis gratuit</a>
+            </div>
+        </div>
+
+        <!-- ===== MODALE détail chantier ===== -->
+        <div class="chantier-modal" data-chantier-modal hidden>
+            <div class="chantier-modal-backdrop" data-modal-close></div>
+            <div class="chantier-modal-content" role="dialog" aria-labelledby="chantier-modal-title" aria-modal="true">
+                <button class="chantier-modal-close" type="button" data-modal-close aria-label="Fermer">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+                <div class="chantier-modal-photos" data-modal-photos></div>
+                <div class="chantier-modal-body">
+                    <span class="chantier-modal-cat" data-modal-cat></span>
+                    <h3 id="chantier-modal-title" data-modal-title></h3>
+                    <p data-modal-desc></p>
+                    <ul class="chantier-tech" data-modal-tech></ul>
+                </div>
             </div>
         </div>
     </section>

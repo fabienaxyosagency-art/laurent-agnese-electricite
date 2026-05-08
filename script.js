@@ -65,36 +65,288 @@
         if (!depth90Sent && ratio >= 0.9) { depth90Sent = true; trackEvent('scroll_depth', { ratio: 90 }); }
     }, { passive: true });
 
-    /* ========== CHANTIERS — Carousel photos par card ========== */
-    document.querySelectorAll('.chantier-card [data-carousel]').forEach(carousel => {
-        const photos = carousel.querySelectorAll('.chantier-photo');
-        const dots = carousel.querySelectorAll('.dot');
-        if (!photos.length || !dots.length) return;
+    /* ========== CHANTIERS — Données pour la modale ========== */
+    const CHANTIERS_DATA = {
+        tableau: {
+            cat: 'Rénovation tableau · Combraille',
+            title: 'Mise aux normes complète d\'un tableau électrique vétuste',
+            desc: 'Maison ancienne avec ancien tableau Branchement Abonné, fusibles à porcelaine, câblage déclassé. Dépose intégrale, percement et préparation de niche, pose d\'un tableau modulaire 2 rangées avec différentiels 30 mA, parafoudre et étiquetage clair pièce par pièce.',
+            tech: [
+                'Dépose totale de l\'ancien tableau Branchement Abonné',
+                'Tableau neuf 2 rangées, différentiels haute sensibilité',
+                'Conformité <strong>NF C 15-100</strong> · attestation Consuel',
+                'Étiquetage et schéma remis au client'
+            ],
+            photos: [
+                { jpg: 'assets/chantiers/tableau-avant-1.jpg', webp: 'assets/chantiers/tableau-avant-1.webp', alt: 'Ancien tableau électrique avant rénovation' },
+                { jpg: 'assets/chantiers/tableau-avant-2.jpg', webp: 'assets/chantiers/tableau-avant-2.webp', alt: 'Niche pendant la rénovation' },
+                { jpg: 'assets/chantiers/tableau-apres.jpg', webp: 'assets/chantiers/tableau-apres.webp', alt: 'Tableau neuf après rénovation' }
+            ]
+        },
+        evlink: {
+            cat: 'Borne de recharge IRVE · Combraille',
+            title: 'Schneider Electric EVlink — pose extérieure 7 kW',
+            desc: 'Wallbox Schneider EVlink 7 kW en pose murale extérieure, raccordement dédié protégé, mise en service complète. Le client charge désormais son véhicule électrique chaque nuit sur prise dédiée 32 A monophasée.',
+            tech: [
+                'Wallbox <strong>7 kW</strong> Schneider Electric EVlink',
+                'Disjoncteur dédié 32 A + différentiel type A',
+                'Liaison équipotentielle de terre conforme IRVE',
+                'Test mise en service + accompagnement prime ADVENIR'
+            ],
+            photos: [
+                { jpg: 'assets/chantiers/evlink-finie.jpg', webp: 'assets/chantiers/evlink-finie.webp', alt: 'Borne EVlink fermée installée extérieur' },
+                { jpg: 'assets/chantiers/evlink-interieur.jpg', webp: 'assets/chantiers/evlink-interieur.webp', alt: 'Intérieur câblage de la borne EVlink' }
+            ]
+        },
+        hager: {
+            cat: 'Borne de recharge IRVE · Combraille',
+            title: 'Hager Witty — pose intérieure abritée',
+            desc: 'Borne Hager Witty installée dans abri couvert, idéale pour propriétaires de garage ou car-port. Voyant LED vert : prête à charger, intervention rapide, pose propre.',
+            tech: [
+                'Wallbox Hager Witty <strong>7 / 22 kW</strong>',
+                'Pose abritée — protection IP54',
+                'Mise en service + démonstration utilisateur'
+            ],
+            photos: [
+                { jpg: 'assets/chantiers/hager-led.jpg', webp: 'assets/chantiers/hager-led.webp', alt: 'Borne Hager Witty LED verte allumée' }
+            ]
+        },
+        portail: {
+            cat: 'Motorisation portail · Combraille',
+            title: 'Portail double battant motorisé Nice — alimentation solaire',
+            desc: 'Solution autonome sans tranchée : motorisation Nice double battant alimentée par panneau solaire dédié. Idéal pour propriétés rurales sans tirage électrique facile vers le portail. Mise en service + télécommandes programmées.',
+            tech: [
+                'Motorisation <strong>Nice</strong> double battant',
+                'Alimentation par <strong>panneau solaire</strong> + batterie tampon',
+                'Aucune tranchée requise — installation rapide',
+                'Programmation télécommandes + photocellules sécurité'
+            ],
+            photos: [
+                { jpg: 'assets/chantiers/portail-resultat.jpg', webp: 'assets/chantiers/portail-resultat.webp', alt: 'Portail double battant motorisé Nice' },
+                { jpg: 'assets/chantiers/portail-systeme.jpg', webp: 'assets/chantiers/portail-systeme.webp', alt: 'Détail système solaire Nice' }
+            ]
+        },
+        groupe: {
+            cat: 'Groupe électrogène commutable · Combraille',
+            title: 'Inverseur de source manuel — habitation / groupe',
+            desc: 'Coupure secteur fréquente en milieu rural ? Pose d\'un inverseur de source manuel à 2 positions (« I Habitation » / « II Groupe ») permettant de basculer en sécurité l\'alimentation de la maison vers un groupe électrogène mobile en cas de panne EDF. Plus de rallonges, plus de risque, sécurité totale.',
+            tech: [
+                'Inverseur de source <strong>2 positions</strong> verrouillé mécaniquement',
+                'Câblage dédié vers prise extérieure 32 A pour le groupe',
+                'Compatible groupes <strong>3 à 6 kW</strong> (résidentiel)',
+                'Audit consommation prioritaire avant pose'
+            ],
+            photos: [
+                { jpg: 'assets/chantiers/groupe-inverseur.jpg', webp: 'assets/chantiers/groupe-inverseur.webp', alt: 'Inverseur de source manuel Habitation/Groupe' },
+                { jpg: 'assets/chantiers/groupe-electrogene.jpg', webp: 'assets/chantiers/groupe-electrogene.webp', alt: 'Groupe électrogène MW Tools en service' }
+            ]
+        }
+    };
 
-        const showPhoto = (index) => {
-            photos.forEach((p, i) => {
-                if (i === index) p.setAttribute('data-photo-active', '');
-                else p.removeAttribute('data-photo-active');
-            });
-            dots.forEach((d, i) => d.classList.toggle('active', i === index));
+    /* ========== CHANTIERS — Ruban scrollant auto + drag/swipe ========== */
+    const ribbon = document.querySelector('[data-chantiers-ribbon]');
+    const ribbonWrapper = ribbon?.parentElement;
+    if (ribbon && ribbonWrapper) {
+        // Duplique les tiles pour boucle infinie
+        const originalTiles = Array.from(ribbon.children);
+        originalTiles.forEach(t => {
+            const clone = t.cloneNode(true);
+            clone.setAttribute('aria-hidden', 'true');
+            clone.tabIndex = -1;
+            ribbon.appendChild(clone);
+        });
+
+        let halfWidth = 0;
+        const computeHalf = () => {
+            const gap = parseFloat(getComputedStyle(ribbon).gap) || 16;
+            halfWidth = originalTiles.reduce((s, el) => s + el.offsetWidth + gap, 0);
+        };
+        computeHalf();
+        window.addEventListener('resize', computeHalf, { passive: true });
+
+        let paused = prefersReducedMotion;
+        let scrollAccum = 0;
+        let resumeTimer = null;
+        const SPEED = 0.35; // px/frame ≈ 21 px/s
+        const RESUME_DELAY = 1500;
+
+        const pauseRibbon = () => { paused = true; clearTimeout(resumeTimer); };
+        const scheduleResume = () => {
+            if (prefersReducedMotion) return;
+            clearTimeout(resumeTimer);
+            resumeTimer = setTimeout(() => { paused = false; }, RESUME_DELAY);
         };
 
-        dots.forEach((dot, i) => {
-            dot.addEventListener('click', () => showPhoto(i));
-        });
+        const tick = () => {
+            if (halfWidth > 0) {
+                if (!paused) {
+                    scrollAccum += SPEED;
+                    if (scrollAccum >= 1) {
+                        const inc = Math.floor(scrollAccum);
+                        ribbonWrapper.scrollLeft += inc;
+                        scrollAccum -= inc;
+                    }
+                }
+                if (ribbonWrapper.scrollLeft >= halfWidth) ribbonWrapper.scrollLeft -= halfWidth;
+                else if (ribbonWrapper.scrollLeft < 0) ribbonWrapper.scrollLeft += halfWidth;
+            }
+            requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
 
-        // Navigation clavier (← →) quand le carousel est focus-within
-        carousel.addEventListener('keydown', (e) => {
-            const current = Array.from(dots).findIndex(d => d.classList.contains('active'));
-            if (e.key === 'ArrowRight') {
-                showPhoto((current + 1) % photos.length);
-                e.preventDefault();
-            } else if (e.key === 'ArrowLeft') {
-                showPhoto((current - 1 + photos.length) % photos.length);
-                e.preventDefault();
+        // Hover desktop
+        ribbonWrapper.addEventListener('mouseenter', pauseRibbon);
+        ribbonWrapper.addEventListener('mouseleave', () => { if (!isDragging) scheduleResume(); });
+
+        // Drag souris
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartScroll = 0;
+        let dragMoved = false;
+        ribbonWrapper.addEventListener('mousedown', (e) => {
+            if (e.target.closest('.chantier-tile') === null && e.target.tagName !== 'BUTTON') {
+                // Ne pas commencer le drag depuis le wrapper si pas sur une tile
+            }
+            isDragging = true;
+            dragMoved = false;
+            dragStartX = e.pageX;
+            dragStartScroll = ribbonWrapper.scrollLeft;
+            ribbonWrapper.classList.add('is-grabbing');
+            pauseRibbon();
+        });
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const dx = e.pageX - dragStartX;
+            if (Math.abs(dx) > 5) dragMoved = true;
+            ribbonWrapper.scrollLeft = dragStartScroll - dx * 1.4;
+        }, { passive: true });
+        window.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                ribbonWrapper.classList.remove('is-grabbing');
+                scheduleResume();
             }
         });
-    });
+
+        // Touch
+        ribbonWrapper.addEventListener('touchstart', pauseRibbon, { passive: true });
+        ribbonWrapper.addEventListener('touchend', scheduleResume, { passive: true });
+
+        // Wheel horizontal
+        let wheelTimer;
+        ribbonWrapper.addEventListener('wheel', (e) => {
+            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+                pauseRibbon();
+                clearTimeout(wheelTimer);
+                wheelTimer = setTimeout(scheduleResume, 200);
+            }
+        }, { passive: true });
+
+        /* ========== Modale chantier — ouverture au clic sur une tile ========== */
+        const modal = document.querySelector('[data-chantier-modal]');
+        const modalPhotosEl = modal?.querySelector('[data-modal-photos]');
+        const modalCatEl = modal?.querySelector('[data-modal-cat]');
+        const modalTitleEl = modal?.querySelector('[data-modal-title]');
+        const modalDescEl = modal?.querySelector('[data-modal-desc]');
+        const modalTechEl = modal?.querySelector('[data-modal-tech]');
+
+        const openModal = (chantierId) => {
+            const data = CHANTIERS_DATA[chantierId];
+            if (!data || !modal) return;
+            trackEvent('chantier_modal_open', { chantier: chantierId });
+
+            modalCatEl.textContent = data.cat;
+            modalTitleEl.textContent = data.title;
+            modalDescEl.textContent = data.desc;
+            modalTechEl.innerHTML = data.tech.map(t => `<li>${t}</li>`).join('');
+
+            // Photos (avec carousel)
+            modalPhotosEl.innerHTML = '';
+            data.photos.forEach((p, i) => {
+                const pic = document.createElement('picture');
+                pic.innerHTML = `<source type="image/webp" srcset="${p.webp}"><img src="${p.jpg}" alt="${p.alt}">`;
+                if (i === 0) pic.setAttribute('data-active', '');
+                modalPhotosEl.appendChild(pic);
+            });
+
+            // Navigation si plusieurs photos
+            if (data.photos.length > 1) {
+                const prev = document.createElement('button');
+                prev.className = 'chantier-modal-nav chantier-modal-nav-prev';
+                prev.type = 'button';
+                prev.setAttribute('aria-label', 'Photo précédente');
+                prev.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>';
+                const next = document.createElement('button');
+                next.className = 'chantier-modal-nav chantier-modal-nav-next';
+                next.type = 'button';
+                next.setAttribute('aria-label', 'Photo suivante');
+                next.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+
+                const dotsContainer = document.createElement('div');
+                dotsContainer.className = 'chantier-modal-photos-dots';
+                data.photos.forEach((_, i) => {
+                    const d = document.createElement('button');
+                    d.type = 'button';
+                    d.className = 'dot' + (i === 0 ? ' active' : '');
+                    d.dataset.idx = i;
+                    d.setAttribute('aria-label', `Photo ${i + 1}`);
+                    dotsContainer.appendChild(d);
+                });
+
+                modalPhotosEl.appendChild(prev);
+                modalPhotosEl.appendChild(next);
+                modalPhotosEl.appendChild(dotsContainer);
+
+                let cur = 0;
+                const showAt = (idx) => {
+                    cur = (idx + data.photos.length) % data.photos.length;
+                    modalPhotosEl.querySelectorAll('picture').forEach((p, i) => {
+                        if (i === cur) p.setAttribute('data-active', '');
+                        else p.removeAttribute('data-active');
+                    });
+                    dotsContainer.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+                };
+                prev.addEventListener('click', () => showAt(cur - 1));
+                next.addEventListener('click', () => showAt(cur + 1));
+                dotsContainer.querySelectorAll('.dot').forEach(d => {
+                    d.addEventListener('click', () => showAt(parseInt(d.dataset.idx, 10)));
+                });
+            }
+
+            modal.hidden = false;
+            document.body.classList.add('chantier-modal-open');
+            modal.querySelector('.chantier-modal-close')?.focus();
+        };
+
+        const closeModal = () => {
+            if (!modal) return;
+            modal.hidden = true;
+            document.body.classList.remove('chantier-modal-open');
+        };
+
+        // Click sur tile → modale (sauf si l'utilisateur a draggé)
+        ribbon.addEventListener('click', (e) => {
+            const tile = e.target.closest('.chantier-tile');
+            if (!tile || dragMoved) return;
+            const id = tile.dataset.chantierId;
+            if (id) openModal(id);
+        });
+
+        // Le bloc featured aussi ouvrable
+        document.querySelector('.chantier-featured')?.addEventListener('click', (e) => {
+            // Évite d'ouvrir la modale quand on drague le slider avant/après
+            if (e.target.closest('.chantier-ba-slider, .chantier-ba-handle')) return;
+            openModal('tableau');
+        });
+
+        // Close handlers
+        modal?.addEventListener('click', (e) => {
+            if (e.target.matches('[data-modal-close]')) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal && !modal.hidden) closeModal();
+        });
+    }
 
     /* ========== CHANTIERS — Slider Avant/Après ========== */
     document.querySelectorAll('[data-before-after]').forEach(ba => {

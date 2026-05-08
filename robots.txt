@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://www.laurent-agnese-electricite.fr/sitemap.xml
+Sitemap: https://www.electricien-marcillat.fr/sitemap.xml
 
 # AI / LLM crawlers — explicitly allowed
 User-agent: GPTBot

@@ -8,6 +8,63 @@
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    /* ========== ANALYTICS — Tracking événements de conversion ==========
+       Utilise Vercel Analytics (window.va) — anonyme, sans cookies.
+       Fallback safe : si va n'est pas chargé, on ne fait rien. */
+    const trackEvent = (name, props = {}) => {
+        try {
+            if (typeof window.va === 'function') {
+                window.va('event', { name, ...props });
+            }
+        } catch (_) { /* silently ignore */ }
+    };
+
+    // Click téléphone : conversion clé pour artisan
+    document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+        link.addEventListener('click', () => {
+            const location = link.closest('section')?.id ||
+                             link.closest('header,footer')?.tagName.toLowerCase() ||
+                             'unknown';
+            trackEvent('phone_click', { location });
+        });
+    });
+
+    // Click WhatsApp : conversion alternative chaude
+    document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+        link.addEventListener('click', () => {
+            const location = link.closest('section')?.id ||
+                             (link.classList.contains('float-whatsapp') ? 'float' : 'inline');
+            trackEvent('whatsapp_click', { location });
+        });
+    });
+
+    // Click Google Business / fiche Google (footer + section avis)
+    document.querySelectorAll('a[href*="share.google"], a[href*="google.com/maps"]').forEach(link => {
+        link.addEventListener('click', () => {
+            trackEvent('gmb_click', { source: link.classList.contains('footer-gmb-link') ? 'footer' : 'inline' });
+        });
+    });
+
+    // Submit formulaire devis : conversion finale haute valeur
+    const devisForm = document.getElementById('devisForm');
+    if (devisForm) {
+        devisForm.addEventListener('submit', () => {
+            const data = new FormData(devisForm);
+            trackEvent('devis_submit', {
+                service: data.get('service') || 'unspecified',
+                city: data.get('city') || 'unspecified'
+            });
+        });
+    }
+
+    // Scroll-depth (engagement) : track 50% et 90%
+    let depth50Sent = false, depth90Sent = false;
+    window.addEventListener('scroll', () => {
+        const ratio = (window.scrollY + window.innerHeight) / document.body.scrollHeight;
+        if (!depth50Sent && ratio >= 0.5) { depth50Sent = true; trackEvent('scroll_depth', { ratio: 50 }); }
+        if (!depth90Sent && ratio >= 0.9) { depth90Sent = true; trackEvent('scroll_depth', { ratio: 90 }); }
+    }, { passive: true });
+
     /* ========== HEADER + SCROLL PROGRESS ========== */
     const header = document.getElementById('header');
     const progressBar = document.querySelector('.scroll-progress span');

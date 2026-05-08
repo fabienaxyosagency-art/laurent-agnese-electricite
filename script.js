@@ -65,6 +65,49 @@
         if (!depth90Sent && ratio >= 0.9) { depth90Sent = true; trackEvent('scroll_depth', { ratio: 90 }); }
     }, { passive: true });
 
+    /* ========== CHANTIERS — Carousel photos par card ========== */
+    document.querySelectorAll('.chantier-card [data-carousel]').forEach(carousel => {
+        const photos = carousel.querySelectorAll('.chantier-photo');
+        const dots = carousel.querySelectorAll('.dot');
+        if (!photos.length || !dots.length) return;
+
+        const showPhoto = (index) => {
+            photos.forEach((p, i) => {
+                if (i === index) p.setAttribute('data-photo-active', '');
+                else p.removeAttribute('data-photo-active');
+            });
+            dots.forEach((d, i) => d.classList.toggle('active', i === index));
+        };
+
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => showPhoto(i));
+        });
+
+        // Navigation clavier (← →) quand le carousel est focus-within
+        carousel.addEventListener('keydown', (e) => {
+            const current = Array.from(dots).findIndex(d => d.classList.contains('active'));
+            if (e.key === 'ArrowRight') {
+                showPhoto((current + 1) % photos.length);
+                e.preventDefault();
+            } else if (e.key === 'ArrowLeft') {
+                showPhoto((current - 1 + photos.length) % photos.length);
+                e.preventDefault();
+            }
+        });
+    });
+
+    /* ========== CHANTIERS — Slider Avant/Après ========== */
+    document.querySelectorAll('[data-before-after]').forEach(ba => {
+        const input = ba.querySelector('[data-ba-input]');
+        if (!input) return;
+        const update = (val) => {
+            ba.style.setProperty('--ba-position', val + '%');
+        };
+        input.addEventListener('input', (e) => update(e.target.value));
+        // Position initiale
+        update(input.value);
+    });
+
     /* ========== LEGAL — Auto-ouverture accordéon depuis le hash ========== */
     const openLegalFromHash = () => {
         const hash = window.location.hash;

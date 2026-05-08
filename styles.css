@@ -2517,49 +2517,93 @@ section {
 }
 
 /* ==========================================================================
-   RUBAN SCROLLANT — Photos chantiers cliquables (auto-scroll + drag/swipe)
+   RUBAN CHANTIERS — Section sombre full-width, scroll CSS infini
+   Inspiré du composant image-auto-slider (translateX -50% 20s linear)
    ========================================================================== */
+.chantiers-section {
+    position: relative;
+    width: 100%;
+    background: var(--ink);
+    overflow: hidden;
+    isolation: isolate;
+    padding: clamp(3rem, 6vw, 5rem) 0 clamp(3.5rem, 7vw, 6rem);
+    margin: 2rem 0 2.5rem;
+}
+.chantiers-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 80% 20%, rgba(30, 159, 217, 0.12), transparent 55%),
+        radial-gradient(ellipse at 20% 80%, rgba(230, 57, 70, 0.08), transparent 55%),
+        linear-gradient(180deg, var(--ink) 0%, var(--ink-90) 50%, var(--ink) 100%);
+    z-index: 0;
+}
+.chantiers-section .chantiers-section-head {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--paper);
+    margin-bottom: 2rem;
+}
+.chantiers-section .chantiers-section-head .eyebrow {
+    color: var(--blue-lighter);
+}
+.chantiers-section .chantiers-section-head h3 {
+    font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+    font-weight: 700;
+    color: var(--paper);
+    letter-spacing: -0.015em;
+    margin-bottom: 0.5rem;
+}
+.chantiers-section .chantiers-section-head p {
+    font-size: 0.95rem;
+    color: rgba(253, 253, 253, 0.7);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.55;
+}
+
+/* Conteneur du ruban avec mask edges */
 .chantiers-ribbon-wrapper {
     position: relative;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding: 0.5rem 0 1.5rem;
-    margin-bottom: 2rem;
-    cursor: grab;
-    user-select: none;
-    -webkit-user-select: none;
-    mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+    z-index: 2;
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
 }
-.chantiers-ribbon-wrapper::-webkit-scrollbar { display: none; }
-.chantiers-ribbon-wrapper.is-grabbing { cursor: grabbing; }
 
+/* Le ruban lui-même : flex horizontal, animation CSS pure 20s linear */
 .chantiers-ribbon {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     width: max-content;
-    padding: 0 1rem;
-    will-change: scroll-position;
+    animation: chantiersScroll 30s linear infinite;
+    will-change: transform;
+}
+.chantiers-ribbon-wrapper:hover .chantiers-ribbon {
+    animation-play-state: paused;
 }
 
-/* Tile = un photo card du ruban */
+@keyframes chantiersScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Tile = photo carrée cliquable */
 .chantier-tile {
-    position: relative;
     flex-shrink: 0;
-    width: clamp(220px, 24vw, 320px);
-    aspect-ratio: 1 / 1;
-    border-radius: var(--radius-lg);
+    width: clamp(192px, 24vw, 320px);
+    height: clamp(192px, 24vw, 320px);
+    border-radius: 0.875rem;
     overflow: hidden;
-    background: var(--ink-10);
-    border: 1px solid var(--ink-10);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.45);
     cursor: pointer;
     padding: 0;
-    transition: transform 350ms var(--ease), box-shadow 350ms var(--ease), filter 350ms var(--ease);
-    will-change: transform;
-    isolation: isolate;
+    border: none;
+    background: var(--ink-90);
+    transition: transform 300ms var(--ease), filter 300ms var(--ease);
 }
 .chantier-tile picture { display: block; width: 100%; height: 100%; }
 .chantier-tile img {
@@ -2568,81 +2612,31 @@ section {
     object-fit: cover;
     object-position: center;
     display: block;
-    transition: transform 600ms var(--ease);
 }
 .chantier-tile:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 16px 36px rgba(11, 21, 36, 0.22);
-    filter: brightness(1.06);
-}
-.chantier-tile:hover img {
-    transform: scale(1.06);
+    transform: scale(1.05);
+    filter: brightness(1.1);
 }
 .chantier-tile:focus-visible {
-    outline: 3px solid var(--blue);
-    outline-offset: 3px;
+    outline: 3px solid var(--blue-lighter);
+    outline-offset: 4px;
 }
 
-.chantier-tile-overlay {
+/* Bottom gradient overlay (comme le composant React) */
+.chantiers-section::after {
+    content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 2;
-    padding: 1.5rem 1.1rem 1rem;
-    background: linear-gradient(180deg, transparent 0%, rgba(11, 21, 36, 0.7) 50%, rgba(11, 21, 36, 0.92) 100%);
-    color: var(--paper);
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    pointer-events: none;
-    transform: translateY(0);
-    transition: transform 350ms var(--ease);
-}
-.chantier-tile-cat {
-    font-size: 0.66rem;
-    font-weight: 700;
-    color: var(--blue-lighter);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-}
-.chantier-tile-overlay strong {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--paper);
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-}
-
-/* Hint "cliquez pour les détails" sur hover */
-.chantier-tile::after {
-    content: 'Voir les détails →';
-    position: absolute;
-    top: 0.85rem;
-    right: 0.85rem;
+    height: 96px;
+    background: linear-gradient(to top, var(--ink), transparent);
     z-index: 3;
-    padding: 0.3rem 0.65rem;
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    color: var(--ink);
-    background: rgba(253, 253, 253, 0.95);
-    border-radius: var(--radius-full);
-    box-shadow: 0 4px 12px rgba(11, 21, 36, 0.2);
-    opacity: 0;
-    transform: translateY(-4px);
-    transition: all 250ms var(--ease);
     pointer-events: none;
 }
-.chantier-tile:hover::after,
-.chantier-tile:focus-visible::after {
-    opacity: 1;
-    transform: translateY(0);
-}
 
-@media (max-width: 640px) {
-    .chantiers-ribbon-wrapper { mask-image: linear-gradient(90deg, transparent 0%, #000 5%, #000 95%, transparent 100%); }
-    .chantier-tile::after { display: none; }
+@media (prefers-reduced-motion: reduce) {
+    .chantiers-ribbon { animation: none; }
 }
 
 /* ==========================================================================

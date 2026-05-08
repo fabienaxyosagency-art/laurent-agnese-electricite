@@ -1418,100 +1418,70 @@
                 </div>
             </article>
 
-            <!-- ===== RUBAN SCROLLANT — Photos chantiers (cliquables) ===== -->
-            <div class="chantiers-ribbon-wrapper reveal">
+        </div>
+
+        <!-- ===== SECTION SOMBRE FULL-WIDTH — Ruban photos chantiers ===== -->
+        <div class="chantiers-section reveal">
+            <div class="container chantiers-section-head">
+                <span class="eyebrow">D'autres chantiers</span>
+                <h3>Photos en bref · cliquez pour les détails</h3>
+                <p>Vrais chantiers, vraies photos. Survolez pour mettre en pause.</p>
+            </div>
+            <div class="chantiers-ribbon-wrapper">
                 <div class="chantiers-ribbon" data-chantiers-ribbon>
-                    <!-- Set 1 — original -->
-                    <button type="button" class="chantier-tile" data-chantier-id="evlink" aria-label="Détails du chantier Borne IRVE Schneider EVlink">
+                    <button type="button" class="chantier-tile" data-chantier-id="evlink" aria-label="Borne IRVE Schneider EVlink — voir les détails">
                         <picture>
                             <source type="image/webp" srcset="assets/chantiers/evlink-finie.webp">
-                            <img src="assets/chantiers/evlink-finie.jpg" alt="Borne de recharge Schneider EVlink — face extérieure" loading="lazy">
+                            <img src="assets/chantiers/evlink-finie.jpg" alt="Borne de recharge Schneider EVlink installée en extérieur" loading="lazy">
                         </picture>
-                        <span class="chantier-tile-overlay">
-                            <span class="chantier-tile-cat">Borne IRVE</span>
-                            <strong>Schneider EVlink</strong>
-                        </span>
                     </button>
-
-                    <button type="button" class="chantier-tile" data-chantier-id="evlink" aria-label="Détails — vue intérieure de la borne EVlink">
+                    <button type="button" class="chantier-tile" data-chantier-id="evlink" aria-label="Câblage intérieur de la borne EVlink — voir les détails">
                         <picture>
                             <source type="image/webp" srcset="assets/chantiers/evlink-interieur.webp">
                             <img src="assets/chantiers/evlink-interieur.jpg" alt="Intérieur câblage de la borne Schneider EVlink" loading="lazy">
                         </picture>
-                        <span class="chantier-tile-overlay">
-                            <span class="chantier-tile-cat">Câblage IRVE</span>
-                            <strong>Disjoncteur 32 A dédié</strong>
-                        </span>
                     </button>
-
-                    <button type="button" class="chantier-tile" data-chantier-id="hager" aria-label="Détails du chantier Borne IRVE Hager Witty">
+                    <button type="button" class="chantier-tile" data-chantier-id="hager" aria-label="Borne IRVE Hager Witty — voir les détails">
                         <picture>
                             <source type="image/webp" srcset="assets/chantiers/hager-led.webp">
                             <img src="assets/chantiers/hager-led.jpg" alt="Borne de recharge Hager Witty avec LED verte" loading="lazy">
                         </picture>
-                        <span class="chantier-tile-overlay">
-                            <span class="chantier-tile-cat">Borne IRVE</span>
-                            <strong>Hager Witty</strong>
-                        </span>
                     </button>
-
-                    <button type="button" class="chantier-tile" data-chantier-id="portail" aria-label="Détails du chantier portail motorisé Nice">
+                    <button type="button" class="chantier-tile" data-chantier-id="portail" aria-label="Portail motorisé Nice — voir les détails">
                         <picture>
                             <source type="image/webp" srcset="assets/chantiers/portail-resultat.webp">
                             <img src="assets/chantiers/portail-resultat.jpg" alt="Portail double battant motorisé Nice" loading="lazy">
                         </picture>
-                        <span class="chantier-tile-overlay">
-                            <span class="chantier-tile-cat">Motorisation</span>
-                            <strong>Portail Nice solaire</strong>
-                        </span>
                     </button>
-
-                    <button type="button" class="chantier-tile" data-chantier-id="portail" aria-label="Détails — système solaire du portail">
+                    <button type="button" class="chantier-tile" data-chantier-id="portail" aria-label="Système solaire du portail — voir les détails">
                         <picture>
                             <source type="image/webp" srcset="assets/chantiers/portail-systeme.webp">
                             <img src="assets/chantiers/portail-systeme.jpg" alt="Détail technique du système solaire Nice" loading="lazy">
                         </picture>
-                        <span class="chantier-tile-overlay">
-                            <span class="chantier-tile-cat">Solaire autonome</span>
-                            <strong>Sans tranchée</strong>
-                        </span>
                     </button>
-
-                    <button type="button" class="chantier-tile" data-chantier-id="groupe" aria-label="Détails du chantier inverseur de source">
+                    <button type="button" class="chantier-tile" data-chantier-id="groupe" aria-label="Inverseur de source — voir les détails">
                         <picture>
                             <source type="image/webp" srcset="assets/chantiers/groupe-inverseur.webp">
                             <img src="assets/chantiers/groupe-inverseur.jpg" alt="Inverseur de source manuel Habitation/Groupe" loading="lazy">
                         </picture>
-                        <span class="chantier-tile-overlay">
-                            <span class="chantier-tile-cat">Sécurité coupure</span>
-                            <strong>Inverseur de source</strong>
-                        </span>
                     </button>
-
-                    <button type="button" class="chantier-tile" data-chantier-id="groupe" aria-label="Détails — groupe électrogène en service">
+                    <button type="button" class="chantier-tile" data-chantier-id="groupe" aria-label="Groupe électrogène en service — voir les détails">
                         <picture>
                             <source type="image/webp" srcset="assets/chantiers/groupe-electrogene.webp">
                             <img src="assets/chantiers/groupe-electrogene.jpg" alt="Groupe électrogène MW Tools en service" loading="lazy">
                         </picture>
-                        <span class="chantier-tile-overlay">
-                            <span class="chantier-tile-cat">Groupe électrogène</span>
-                            <strong>Sortie 32 A</strong>
-                        </span>
                     </button>
-
-                    <button type="button" class="chantier-tile" data-chantier-id="tableau" aria-label="Détails du chantier rénovation tableau électrique">
+                    <button type="button" class="chantier-tile" data-chantier-id="tableau" aria-label="Préparation niche tableau — voir les détails">
                         <picture>
                             <source type="image/webp" srcset="assets/chantiers/tableau-avant-2.webp">
                             <img src="assets/chantiers/tableau-avant-2.jpg" alt="Niche tableau pendant le chantier de rénovation" loading="lazy">
                         </picture>
-                        <span class="chantier-tile-overlay">
-                            <span class="chantier-tile-cat">Process chantier</span>
-                            <strong>Préparation niche</strong>
-                        </span>
                     </button>
                 </div>
             </div>
+        </div>
 
+        <div class="container">
             <div class="gallery-cta reveal">
                 <p>Un projet similaire en tête&nbsp;?</p>
                 <a href="#devis" class="btn btn-primary">Parlons-en — devis gratuit</a>

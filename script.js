@@ -143,11 +143,10 @@
         }
     };
 
-    /* ========== CHANTIERS — Ruban scrollant auto + drag/swipe ========== */
+    /* ========== CHANTIERS — Ruban CSS infini + modale ========== */
     const ribbon = document.querySelector('[data-chantiers-ribbon]');
-    const ribbonWrapper = ribbon?.parentElement;
-    if (ribbon && ribbonWrapper) {
-        // Duplique les tiles pour boucle infinie
+    if (ribbon) {
+        // Duplique les tiles pour la boucle CSS translateX(-50%)
         const originalTiles = Array.from(ribbon.children);
         originalTiles.forEach(t => {
             const clone = t.cloneNode(true);
@@ -155,92 +154,6 @@
             clone.tabIndex = -1;
             ribbon.appendChild(clone);
         });
-
-        let halfWidth = 0;
-        const computeHalf = () => {
-            const gap = parseFloat(getComputedStyle(ribbon).gap) || 16;
-            halfWidth = originalTiles.reduce((s, el) => s + el.offsetWidth + gap, 0);
-        };
-        computeHalf();
-        window.addEventListener('resize', computeHalf, { passive: true });
-
-        let paused = prefersReducedMotion;
-        let scrollAccum = 0;
-        let resumeTimer = null;
-        const SPEED = 0.35; // px/frame ≈ 21 px/s
-        const RESUME_DELAY = 1500;
-
-        const pauseRibbon = () => { paused = true; clearTimeout(resumeTimer); };
-        const scheduleResume = () => {
-            if (prefersReducedMotion) return;
-            clearTimeout(resumeTimer);
-            resumeTimer = setTimeout(() => { paused = false; }, RESUME_DELAY);
-        };
-
-        const tick = () => {
-            if (halfWidth > 0) {
-                if (!paused) {
-                    scrollAccum += SPEED;
-                    if (scrollAccum >= 1) {
-                        const inc = Math.floor(scrollAccum);
-                        ribbonWrapper.scrollLeft += inc;
-                        scrollAccum -= inc;
-                    }
-                }
-                if (ribbonWrapper.scrollLeft >= halfWidth) ribbonWrapper.scrollLeft -= halfWidth;
-                else if (ribbonWrapper.scrollLeft < 0) ribbonWrapper.scrollLeft += halfWidth;
-            }
-            requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-
-        // Hover desktop
-        ribbonWrapper.addEventListener('mouseenter', pauseRibbon);
-        ribbonWrapper.addEventListener('mouseleave', () => { if (!isDragging) scheduleResume(); });
-
-        // Drag souris
-        let isDragging = false;
-        let dragStartX = 0;
-        let dragStartScroll = 0;
-        let dragMoved = false;
-        ribbonWrapper.addEventListener('mousedown', (e) => {
-            if (e.target.closest('.chantier-tile') === null && e.target.tagName !== 'BUTTON') {
-                // Ne pas commencer le drag depuis le wrapper si pas sur une tile
-            }
-            isDragging = true;
-            dragMoved = false;
-            dragStartX = e.pageX;
-            dragStartScroll = ribbonWrapper.scrollLeft;
-            ribbonWrapper.classList.add('is-grabbing');
-            pauseRibbon();
-        });
-        window.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            const dx = e.pageX - dragStartX;
-            if (Math.abs(dx) > 5) dragMoved = true;
-            ribbonWrapper.scrollLeft = dragStartScroll - dx * 1.4;
-        }, { passive: true });
-        window.addEventListener('mouseup', () => {
-            if (isDragging) {
-                isDragging = false;
-                ribbonWrapper.classList.remove('is-grabbing');
-                scheduleResume();
-            }
-        });
-
-        // Touch
-        ribbonWrapper.addEventListener('touchstart', pauseRibbon, { passive: true });
-        ribbonWrapper.addEventListener('touchend', scheduleResume, { passive: true });
-
-        // Wheel horizontal
-        let wheelTimer;
-        ribbonWrapper.addEventListener('wheel', (e) => {
-            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-                pauseRibbon();
-                clearTimeout(wheelTimer);
-                wheelTimer = setTimeout(scheduleResume, 200);
-            }
-        }, { passive: true });
 
         /* ========== Modale chantier — ouverture au clic sur une tile ========== */
         const modal = document.querySelector('[data-chantier-modal]');
@@ -327,7 +240,7 @@
         // Click sur tile → modale (sauf si l'utilisateur a draggé)
         ribbon.addEventListener('click', (e) => {
             const tile = e.target.closest('.chantier-tile');
-            if (!tile || dragMoved) return;
+            if (!tile) return;
             const id = tile.dataset.chantierId;
             if (id) openModal(id);
         });

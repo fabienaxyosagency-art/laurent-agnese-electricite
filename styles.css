@@ -2825,7 +2825,8 @@ body.chantier-modal-open { overflow: hidden; }
 
 /* === BEFORE/AFTER SLIDER === */
 .chantier-ba {
-    position: relative;
+    position: absolute;
+    inset: 0;
     user-select: none;
     -webkit-user-select: none;
     cursor: ew-resize;

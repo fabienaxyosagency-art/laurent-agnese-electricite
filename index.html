@@ -1654,11 +1654,16 @@
     </main>
 
     <!-- ========== FOOTER ========== -->
-    <!-- ========== LEGAL — Mentions légales + RGPD ========== -->
+    <!-- ========== LEGAL — Mentions légales + RGPD (accordéons compacts) ========== -->
     <section id="legal" class="legal" aria-label="Informations légales">
-        <div class="container legal-grid">
-            <article id="mentions" class="legal-block">
-                <h2>Mentions légales</h2>
+        <div class="container legal-list">
+            <details id="mentions" class="legal-details">
+                <summary>
+                    <span class="legal-summary-label">Mentions légales</span>
+                    <span class="legal-summary-hint">Cliquez pour consulter</span>
+                    <svg class="legal-chevron" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </summary>
+                <div class="legal-content">
                 <dl>
                     <dt>Éditeur du site</dt>
                     <dd>
@@ -1697,10 +1702,16 @@
                     <dt>Médiation de la consommation</dt>
                     <dd>Conformément à l'article L.612-1 du Code de la consommation, le client peut recourir gratuitement au médiateur de la consommation compétent en cas de litige non résolu&nbsp;: <a href="https://www.economie.gouv.fr/mediation-conso" target="_blank" rel="noopener">economie.gouv.fr/mediation-conso</a>.</dd>
                 </dl>
-            </article>
+                </div>
+            </details>
 
-            <article id="rgpd" class="legal-block">
-                <h2>Politique de confidentialité (RGPD)</h2>
+            <details id="rgpd" class="legal-details">
+                <summary>
+                    <span class="legal-summary-label">Politique de confidentialité (RGPD)</span>
+                    <span class="legal-summary-hint">Cliquez pour consulter</span>
+                    <svg class="legal-chevron" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </summary>
+                <div class="legal-content">
 
                 <h3>Données collectées</h3>
                 <p>Lorsque vous remplissez le formulaire de demande de devis, nous collectons&nbsp;: nom, prénom, commune, téléphone, email, et la description de votre projet. Aucune autre donnée n'est collectée à votre insu sur ce site (pas d'outil d'analyse type Google Analytics, pas de cookies tiers).</p>
@@ -1748,7 +1759,8 @@
                 <p>Le site est hébergé par Vercel Inc. (États-Unis) sur des CDN situés en Europe (Paris). Les données du formulaire transitent par mailto et sont reçues directement dans la boîte email du gérant — elles ne sont stockées sur aucun serveur intermédiaire.</p>
 
                 <p class="legal-update">Dernière mise à jour&nbsp;: 8 mai 2026.</p>
-            </article>
+                </div>
+            </details>
         </div>
     </section>
 

@@ -65,6 +65,21 @@
         if (!depth90Sent && ratio >= 0.9) { depth90Sent = true; trackEvent('scroll_depth', { ratio: 90 }); }
     }, { passive: true });
 
+    /* ========== LEGAL — Auto-ouverture accordéon depuis le hash ========== */
+    const openLegalFromHash = () => {
+        const hash = window.location.hash;
+        if (hash === '#mentions' || hash === '#rgpd') {
+            const target = document.querySelector(hash);
+            if (target && target.tagName === 'DETAILS') {
+                target.open = true;
+                // Scroll smooth après l'ouverture pour bien centrer
+                setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+            }
+        }
+    };
+    window.addEventListener('hashchange', openLegalFromHash);
+    if (window.location.hash) openLegalFromHash();
+
     /* ========== HEADER + SCROLL PROGRESS ========== */
     const header = document.getElementById('header');
     const progressBar = document.querySelector('.scroll-progress span');

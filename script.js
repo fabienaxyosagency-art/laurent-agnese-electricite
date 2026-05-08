@@ -38,15 +38,19 @@
     /* ========== BURGER MENU ========== */
     const burger = document.querySelector('.burger');
     if (burger) {
+        const setBurgerState = (isOpen) => {
+            burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            burger.setAttribute('aria-label', isOpen ? 'Fermer le menu' : 'Ouvrir le menu');
+        };
         burger.addEventListener('click', () => {
             const isOpen = document.body.classList.toggle('nav-open');
-            burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            setBurgerState(isOpen);
         });
 
         document.querySelectorAll('.main-nav a').forEach(link => {
             link.addEventListener('click', () => {
                 document.body.classList.remove('nav-open');
-                burger.setAttribute('aria-expanded', 'false');
+                setBurgerState(false);
             });
         });
     }

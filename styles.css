@@ -378,7 +378,7 @@ button { cursor: pointer; background: none; border: none; }
 .nav-link:hover .nav-tag {
     opacity: 1;
     transform: translate(-50%, 0) scale(1);
-    color: var(--red);
+    color: var(--red-dark);
 }
 
 /* Reveal subtil quand on survole la nav entière (container) */
@@ -1479,12 +1479,19 @@ section {
     margin-bottom: 1.25rem;
     color: var(--ink);
 }
+/* Texte rouge pour titres et accents — utilise red-dark pour respecter WCAG AA (5.4:1+ sur blanc) */
+.section-head h2 em,
+.about-lead em,
+.about-text em {
+    color: var(--red-dark);
+}
+
 .section-head h2 em {
     font-style: normal;
     font-family: var(--font-script);
     font-weight: 600;
     font-size: 1.08em;
-    color: var(--red);
+    color: var(--red-dark);
     letter-spacing: 0;
 }
 
@@ -2887,10 +2894,16 @@ section {
 .devis-form input:focus,
 .devis-form select:focus,
 .devis-form textarea:focus {
-    outline: none;
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
     border-color: var(--blue);
     background: var(--paper);
-    box-shadow: 0 0 0 4px rgba(30, 159, 217, 0.12);
+    box-shadow: 0 0 0 4px rgba(30, 159, 217, 0.18);
+}
+.devis-form input:focus:not(:focus-visible),
+.devis-form select:focus:not(:focus-visible),
+.devis-form textarea:focus:not(:focus-visible) {
+    outline: none;
 }
 .devis-form textarea { resize: vertical; min-height: 96px; font-family: inherit; }
 .devis-form select {
@@ -3522,4 +3535,120 @@ textarea:focus-visible,
     .float-whatsapp-pulse {
         animation: none !important;
     }
+}
+
+/* ==========================================================================
+   LEGAL — Mentions légales + RGPD (sections obligatoires France/UE)
+   ========================================================================== */
+
+.legal {
+    background: var(--paper-alt);
+    padding: clamp(3rem, 6vw, 5rem) 0 clamp(2rem, 4vw, 3rem);
+    border-top: 1px solid var(--ink-10);
+}
+
+.legal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1180px;
+}
+
+.legal-block {
+    background: var(--paper);
+    padding: clamp(1.75rem, 3vw, 2.5rem);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--ink-10);
+    box-shadow: var(--shadow-sm);
+    scroll-margin-top: 110px;
+}
+
+.legal-block h2 {
+    font-size: clamp(1.4rem, 2.4vw, 1.7rem);
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 2px solid var(--blue);
+    letter-spacing: -0.015em;
+}
+
+.legal-block h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 1.4rem 0 0.5rem;
+    letter-spacing: -0.01em;
+}
+
+.legal-block p,
+.legal-block dd,
+.legal-block li {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--ink-80);
+}
+
+.legal-block p { margin-bottom: 0.75rem; }
+
+.legal-block ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 1rem;
+}
+
+.legal-block ul li {
+    padding: 0.3rem 0 0.3rem 1.25rem;
+    position: relative;
+}
+.legal-block ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.85rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--blue);
+}
+
+.legal-block dl {
+    display: grid;
+    gap: 0.75rem 1.25rem;
+}
+
+.legal-block dt {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 0.85rem;
+}
+.legal-block dt:first-child { margin-top: 0; }
+
+.legal-block dd {
+    margin: 0;
+}
+
+.legal-block a {
+    color: var(--blue-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    transition: color var(--t-fast) var(--ease);
+}
+.legal-block a:hover { color: var(--blue); }
+
+.legal-update {
+    margin-top: 1.75rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--ink-10);
+    font-size: 0.82rem;
+    color: var(--ink-60);
+    font-style: italic;
+}
+
+@media (max-width: 900px) {
+    .legal-grid { grid-template-columns: 1fr; gap: 1.5rem; }
 }

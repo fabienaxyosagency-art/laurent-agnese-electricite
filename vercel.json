@@ -1,6 +1,14 @@
 {
     "cleanUrls": true,
     "trailingSlash": false,
+    "redirects": [
+        {
+            "source": "/(.*)",
+            "has": [{ "type": "host", "value": "electricien-marcillat.fr" }],
+            "destination": "https://www.electricien-marcillat.fr/$1",
+            "statusCode": 301
+        }
+    ],
     "headers": [
         {
             "source": "/(.*)",

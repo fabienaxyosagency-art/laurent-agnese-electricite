@@ -2,7 +2,7 @@
 title: "Laurent Agnese Électricité Générale — Électricien à Marcillat-en-Combraille (03) | Devis Gratuit"
 description: "Laurent Agnese Électricité Générale — Artisan électricien installé en Combraille depuis 1997 (29 ans), basé à Marcillat-en-Combraille (Allier 03). Rénovation, dépannage 7j/7, remise aux normes NF C 15..."
 url: https://www.electricien-marcillat.fr/
-last_updated: 2026-05-08
+last_updated: 2026-05-10
 canonical: https://www.electricien-marcillat.fr/
 ---
 
@@ -75,7 +75,7 @@ Laurent les diagnostique et les répare en moyenne sous 1 h d'intervention.
 
 Assurance décennale
 
-Certifié IRVE · bornes
+Devis sous 24h
 
 Dépannage 7j/7
 
@@ -91,7 +91,7 @@ Consuel obtenu
 
 Assurance décennale
 
-Certifié IRVE · bornes
+Devis sous 24h
 
 Dépannage 7j/7
 
@@ -173,15 +173,13 @@ Mise en conformité NF C 15-100, terre, différentiels 30 mA, tableau sécurisé
 
 04
 
-Spécialiste IRVE
-
 ### Bornes de recharge
 
-Wallbox 7 / 11 / 22 kW, intérieure ou extérieure. Laurent est certifié IRVE et gère votre prime ADVENIR.
+Wallbox et prises de recharge pour véhicule électrique, intérieure ou extérieure. Étude technique, devis détaillé, mise en service.
 
 - Conseil + marque
 - Pose + mise en service
-- Prime ADVENIR
+- Devis détaillé fourni
 
 05
 
@@ -215,15 +213,13 @@ Spots encastrés, suspensions, appliques, LED, éclairage d'allée, projecteurs,
 
 04
 
-Spécialiste IRVE
-
 ### Bornes de recharge
 
-Wallbox 7 / 11 / 22 kW, intérieure ou extérieure. Laurent est certifié IRVE et gère votre prime ADVENIR.
+Wallbox et prises de recharge pour véhicule électrique, intérieure ou extérieure. Étude technique, devis détaillé, mise en service.
 
 - Conseil + marque
 - Pose + mise en service
-- Prime ADVENIR
+- Devis détaillé fourni
 
 05
 
@@ -362,7 +358,7 @@ d'un câblage des années 70 ou d'une rénovation 2026.
 
 Quand Laurent fonde son entreprise en 2019, c'est l'aboutissement
 d'un parcours ancré : **installations résidentielles, industrielles
-et nouvelles mobilités électriques (IRVE)**. Du premier coup de fil
+et nouvelles mobilités électriques**. Du premier coup de fil
 jusqu'au dernier coup de tournevis, c'est lui qui chiffre, lui qui pose,
 lui qui garantit. Pas de sous-traitance. Pas d'intermédiaire qui dilue
 la responsabilité.
@@ -415,8 +411,8 @@ TVA intracom.
 Assurance
 :   Décennale + RC Pro à jour
 
-Certifications
-:   IRVE · NF C 15-100 · Consuel
+Conformité
+:   NF C 15-100 · Consuel
 
 Note Google
 :   4,5 / 5 · 9 avis vérifiés
@@ -489,10 +485,6 @@ Marcillat-en-Combraille (03420) et un rayon de 30 à 40 km : Terjat, Mazirat, Sa
 Intervenez-vous en dépannage urgent le week-end ?
 
 Oui. Pour toute panne urgente (coupure générale, disjoncteur qui saute, court-circuit, tableau défaillant), appelez le [**06 49 79 70 33**](tel:+33649797033). Intervention prioritaire sur Marcillat et les communes proches, y compris le week-end. Diagnostic méthodique, réparation propre, tarif annoncé avant intervention.
-
-Êtes-vous certifié pour installer les bornes de recharge ?
-
-Oui. L'installation de bornes de recharge supérieures à 3,7 kW nécessite la qualification **IRVE** (Infrastructure de Recharge pour Véhicules Électriques). Laurent Agnese est certifié IRVE et vous accompagne sur tout le projet : dimensionnement, choix de la marque, pose, mise en service et démarches pour la **prime ADVENIR**.
 
 Combien coûte une remise aux normes électriques ?
 

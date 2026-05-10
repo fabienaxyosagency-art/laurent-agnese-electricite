@@ -84,14 +84,14 @@
             ]
         },
         evlink: {
-            cat: 'Borne de recharge IRVE · Combraille',
+            cat: 'borne de recharge · Combraille',
             title: 'Schneider Electric EVlink — pose extérieure 7 kW',
-            desc: 'Wallbox Schneider EVlink 7 kW en pose murale extérieure, raccordement dédié protégé, mise en service complète. Le client charge désormais son véhicule électrique chaque nuit sur prise dédiée 32 A monophasée.',
+            desc: 'Wallbox Schneider EVlink en pose murale extérieure, raccordement dédié protégé, mise en service complète. Le client charge désormais son véhicule électrique chaque nuit sur prise dédiée 32 A monophasée.',
             tech: [
                 'Wallbox <strong>7 kW</strong> Schneider Electric EVlink',
                 'Disjoncteur dédié 32 A + différentiel type A',
-                'Liaison équipotentielle de terre conforme IRVE',
-                'Test mise en service + accompagnement prime ADVENIR'
+                'Liaison équipotentielle de terre conforme NF C 15-100',
+                'Test mise en service complète'
             ],
             photos: [
                 { jpg: 'assets/chantiers/evlink-finie.jpg', webp: 'assets/chantiers/evlink-finie.webp', alt: 'Borne EVlink fermée installée extérieur' },
@@ -99,7 +99,7 @@
             ]
         },
         hager: {
-            cat: 'Borne de recharge IRVE · Combraille',
+            cat: 'borne de recharge · Combraille',
             title: 'Hager Witty — pose intérieure abritée',
             desc: 'Borne Hager Witty installée dans abri couvert, idéale pour propriétaires de garage ou car-port. Voyant LED vert : prête à charger, intervention rapide, pose propre.',
             tech: [
@@ -712,7 +712,7 @@
             { keyword: 'Dépannage',         url: 'https://images.unsplash.com/photo-1615774925655-a0e97fc85c14?auto=format&fit=crop&w=900&q=80' },
             // Remise aux normes : câblage chaotique non conforme, démontre le besoin de remise aux normes
             { keyword: 'Remise aux normes', url: 'https://images.unsplash.com/photo-1601462904263-f2fa0c851cb9?auto=format&fit=crop&w=900&q=80' },
-            // Bornes IRVE : pistolet de recharge VE branché sur véhicule
+            // bornes de recharge : pistolet de recharge VE branché sur véhicule
             { keyword: 'Bornes',            url: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=900&q=80' },
             // Création de tableau : tableau ABB neuf avec câblage propre et organisé
             { keyword: 'tableau',           url: 'https://images.unsplash.com/photo-1576446470246-499c738d1c8e?auto=format&fit=crop&w=900&q=80' },

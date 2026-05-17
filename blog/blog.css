@@ -1,0 +1,464 @@
+/* ==========================================================================
+   BLOG — Laurent Agnese Électricité Générale
+   Étend styles.css (chargé avant). Styles dédiés listing + article.
+   ========================================================================== */
+
+/* === Conteneur générique blog === */
+.blog {
+    background: var(--paper);
+    padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(3rem, 6vw, 5rem);
+    min-height: 60vh;
+}
+
+.blog-container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+/* ==========================================================================
+   LISTING — /blog/index.html
+   ========================================================================== */
+
+.blog-hero {
+    text-align: center;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+.blog-hero .eyebrow {
+    justify-content: center;
+}
+.blog-hero h1 {
+    font-size: clamp(1.85rem, 4.5vw, 2.85rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1rem;
+}
+.blog-hero h1 em {
+    font-style: normal;
+    font-family: var(--font-script);
+    font-weight: 600;
+    color: var(--red-dark);
+    font-size: 1.05em;
+}
+.blog-hero p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--ink-60);
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+@media (max-width: 640px) {
+    .blog-grid { grid-template-columns: 1fr; gap: 1rem; }
+}
+
+.blog-card {
+    background: var(--paper);
+    border: 1px solid var(--ink-10);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all var(--t) var(--ease);
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+}
+.blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(30, 159, 217, 0.3);
+}
+
+.blog-card-thumb {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--ink-90) 0%, var(--ink) 100%);
+}
+.blog-card-thumb-pattern {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 70% 30%, rgba(30, 159, 217, 0.25), transparent 60%),
+        radial-gradient(ellipse at 30% 80%, rgba(230, 57, 70, 0.15), transparent 55%);
+}
+.blog-card-thumb-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    color: var(--paper);
+    opacity: 0.85;
+}
+.blog-card-cat {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: rgba(11, 21, 36, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(253, 253, 253, 0.15);
+}
+
+.blog-card-body {
+    padding: 1.5rem 1.5rem 1.65rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.blog-card-body h2 {
+    font-size: 1.18rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+}
+.blog-card-body p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--ink-60);
+    margin-bottom: 1.1rem;
+    flex: 1;
+}
+.blog-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--ink-10);
+    font-size: 0.78rem;
+    color: var(--ink-60);
+}
+.blog-card-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+.blog-card-meta svg {
+    width: 14px;
+    height: 14px;
+    color: var(--blue);
+}
+
+/* ==========================================================================
+   ARTICLE — /blog/[slug]/index.html
+   ========================================================================== */
+
+.article-hero {
+    text-align: center;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+    padding-bottom: clamp(1.5rem, 3vw, 2rem);
+    border-bottom: 1px solid var(--ink-10);
+}
+.article-hero .article-cat {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+    color: var(--paper);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: var(--radius-full);
+    margin-bottom: 1.25rem;
+}
+.article-hero h1 {
+    font-size: clamp(1.85rem, 4.5vw, 2.85rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.article-hero h1 em {
+    font-style: normal;
+    color: var(--red-dark);
+}
+.article-lead {
+    font-size: 1.12rem;
+    line-height: 1.55;
+    color: var(--ink-80);
+    max-width: 680px;
+    margin: 0 auto 1.5rem;
+    font-weight: 500;
+}
+
+.article-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    font-size: 0.85rem;
+    color: var(--ink-60);
+    flex-wrap: wrap;
+}
+.article-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.article-meta svg {
+    width: 16px;
+    height: 16px;
+    color: var(--blue);
+}
+
+/* === Body article === */
+.article-body {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--ink-80);
+}
+.article-body > * + * {
+    margin-top: 1.1rem;
+}
+.article-body h2 {
+    font-size: 1.55rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-top: 2.25rem;
+    margin-bottom: 0.65rem;
+    padding-top: 0.5rem;
+    scroll-margin-top: 110px;
+}
+.article-body h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-top: 1.85rem;
+    margin-bottom: 0.5rem;
+}
+.article-body p {
+    color: var(--ink-80);
+}
+.article-body strong {
+    color: var(--ink);
+    font-weight: 700;
+}
+.article-body a {
+    color: var(--blue-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    transition: color var(--t-fast) var(--ease);
+}
+.article-body a:hover {
+    color: var(--blue);
+}
+
+.article-body ul,
+.article-body ol {
+    padding-left: 1.4rem;
+    margin-top: 0.5rem;
+}
+.article-body ul li,
+.article-body ol li {
+    margin-top: 0.45rem;
+    line-height: 1.65;
+}
+.article-body ul li::marker {
+    color: var(--blue);
+}
+
+.article-body blockquote {
+    border-left: 4px solid var(--blue);
+    padding: 0.85rem 1.25rem;
+    background: var(--blue-soft);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    color: var(--ink);
+    font-style: italic;
+    margin: 1.5rem 0;
+}
+
+.article-body .info-box {
+    background: var(--paper-alt);
+    border: 1px solid var(--ink-10);
+    border-left: 4px solid var(--blue);
+    padding: 1.1rem 1.35rem;
+    border-radius: var(--radius);
+    margin: 1.5rem 0;
+}
+.article-body .info-box strong {
+    display: block;
+    color: var(--blue-dark);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.45rem;
+}
+.article-body .info-box p:last-child { margin-bottom: 0; }
+
+.article-body .warning-box {
+    background: rgba(230, 57, 70, 0.05);
+    border: 1px solid rgba(230, 57, 70, 0.2);
+    border-left: 4px solid var(--red);
+    padding: 1.1rem 1.35rem;
+    border-radius: var(--radius);
+    margin: 1.5rem 0;
+}
+.article-body .warning-box strong {
+    display: block;
+    color: var(--red-dark);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.45rem;
+}
+
+/* === CTA mi/fin d'article === */
+.article-cta {
+    margin: 3rem auto 0;
+    max-width: 720px;
+    padding: 1.85rem 2rem;
+    background: linear-gradient(135deg, var(--blue-soft) 0%, var(--paper-alt) 100%);
+    border-radius: var(--radius-lg);
+    border: 1px dashed rgba(30, 159, 217, 0.3);
+    text-align: center;
+}
+.article-cta h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+}
+.article-cta p {
+    font-size: 0.95rem;
+    color: var(--ink-60);
+    margin-bottom: 1rem;
+}
+.article-cta .btn {
+    margin-top: 0.5rem;
+}
+
+/* === Bas de page article — navigation + share === */
+.article-footer {
+    max-width: 720px;
+    margin: 3rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid var(--ink-10);
+}
+.article-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: var(--paper-alt);
+    color: var(--ink);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.93rem;
+    border: 1px solid var(--ink-10);
+    transition: all var(--t-fast) var(--ease);
+}
+.article-back:hover {
+    background: var(--blue-soft);
+    border-color: var(--blue);
+    color: var(--blue-dark);
+}
+.article-back svg {
+    width: 16px;
+    height: 16px;
+}
+
+.article-share {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.article-share-label {
+    font-size: 0.85rem;
+    color: var(--ink-60);
+    font-weight: 600;
+}
+.article-share-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.article-share-buttons a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--ink-10);
+    background: var(--paper);
+    color: var(--ink-80);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    transition: all var(--t-fast) var(--ease);
+}
+.article-share-buttons a:hover {
+    background: var(--blue-soft);
+    border-color: var(--blue);
+    color: var(--blue-dark);
+}
+.article-share-buttons svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* === Related articles bottom === */
+.article-related {
+    max-width: 920px;
+    margin: 4rem auto 0;
+    padding-top: 3rem;
+    border-top: 1px solid var(--ink-10);
+}
+.article-related h2 {
+    font-size: 1.45rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--ink);
+    margin-bottom: 1.75rem;
+    letter-spacing: -0.015em;
+}
+.article-related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+/* === Reading progress bar === */
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue) 0%, var(--red) 100%);
+    z-index: 100;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 100ms linear;
+    pointer-events: none;
+}

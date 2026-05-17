@@ -1,8 +1,8 @@
 ---
 title: "Laurent Agnese Électricité Générale — Électricien à Marcillat-en-Combraille (03) | Devis Gratuit"
-description: "Laurent Agnese Électricité Générale — Artisan électricien installé en Combraille depuis 1997 (29 ans), basé à Marcillat-en-Combraille (Allier 03). Rénovation, dépannage 7j/7, remise aux normes NF C 15..."
+description: "Laurent Agnese Électricité Générale — Artisan électricien installé en Combraille depuis 1997 (29 ans), basé à Marcillat-en-Combraille (Allier 03). Rénovation, dépannage 7j/7, remise aux normes NF C 15"
 url: https://www.electricien-marcillat.fr/
-last_updated: 2026-05-10
+last_updated: 2026-05-17
 canonical: https://www.electricien-marcillat.fr/
 ---
 

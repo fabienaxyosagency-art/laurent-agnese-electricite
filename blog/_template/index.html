@@ -1,0 +1,293 @@
+<!--
+================================================================================
+  TEMPLATE D'ARTICLE BLOG — Laurent Agnese Électricité Générale
+  ================================================================================
+
+  COMMENT L'UTILISER :
+  1. Dupliquer ce dossier _template en remplaçant le nom par le slug de l'article
+     (slug = URL en minuscules avec tirets, ex: "depannage-electrique-dimanche")
+  2. Remplir tous les placeholders [REMPLACER:XXX] ci-dessous
+  3. Réécrire la balise <main> avec le contenu réel de l'article
+  4. Ajouter une carte dans /blog/index.html (listing)
+  5. Ajouter 2 entrées au sitemap.xml (la page HTML + sa version .md)
+  6. Lancer le script pour générer la version .md (voir BLOG-GUIDE.md)
+  7. Commit + déploy
+
+  RACCOURCIS :
+  - Tous les liens utilisent /chemin/ (slash final) — clean URLs Vercel activé
+  - Couleurs charte : --blue (#1E9FD9), --red-dark (#B01A26 — pour TEXTE)
+  - Images partagées : /assets/chantiers/ + /assets/launch/
+================================================================================
+-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ===== À MODIFIER : titre + description SEO ===== -->
+    <title>[REMPLACER:TITRE_DE_LARTICLE] | Laurent Agnese</title>
+    <meta name="description" content="[REMPLACER:DESCRIPTION_SEO_140_160_CARACTERES]">
+    <meta name="keywords" content="[REMPLACER:5_A_10_MOTS_CLES_SEPARES_PAR_VIRGULE]">
+
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <meta name="theme-color" content="#1E9FD9">
+    <meta name="author" content="Laurent Agnese">
+
+    <!-- ===== À MODIFIER : URL canonique avec le slug ===== -->
+    <link rel="canonical" href="https://www.electricien-marcillat.fr/blog/[REMPLACER:SLUG]/">
+
+    <!-- ===== Open Graph (réseaux sociaux) — à modifier ===== -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="[REMPLACER:TITRE_OG_COURT]">
+    <meta property="og:description" content="[REMPLACER:DESCRIPTION_OG_COURTE]">
+    <meta property="og:url" content="https://www.electricien-marcillat.fr/blog/[REMPLACER:SLUG]/">
+    <meta property="og:image" content="https://www.electricien-marcillat.fr/assets/chantiers/[REMPLACER:IMAGE].jpg">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="article:published_time" content="[REMPLACER:YYYY-MM-DD]">
+    <meta property="article:author" content="Laurent Agnese">
+    <meta property="article:section" content="[REMPLACER:CATEGORIE]">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.electricien-marcillat.fr/assets/chantiers/[REMPLACER:IMAGE].jpg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231E9FD9'/%3E%3Cpath d='M50 18 L30 54 L46 54 L38 82 L72 42 L54 42 Z' fill='%23E63946'/%3E%3C/svg%3E">
+
+    <link rel="stylesheet" href="../../styles.css?v=20260510-1">
+    <link rel="stylesheet" href="../blog.css?v=20260510-1">
+
+    <!-- ===== Schema.org BlogPosting — à modifier ===== -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "[REMPLACER:TITRE_COMPLET]",
+        "description": "[REMPLACER:DESCRIPTION]",
+        "image": "https://www.electricien-marcillat.fr/assets/chantiers/[REMPLACER:IMAGE].jpg",
+        "datePublished": "[REMPLACER:YYYY-MM-DD]",
+        "dateModified": "[REMPLACER:YYYY-MM-DD]",
+        "wordCount": [REMPLACER:NB_MOTS],
+        "timeRequired": "PT[REMPLACER:MIN_LECTURE]M",
+        "inLanguage": "fr-FR",
+        "author": {"@type": "Person", "name": "Laurent Agnese", "url": "https://www.electricien-marcillat.fr/#apropos", "jobTitle": "Artisan électricien"},
+        "publisher": {"@type": "LocalBusiness", "@id": "https://www.electricien-marcillat.fr/", "name": "Laurent Agnese Électricité Générale"},
+        "mainEntityOfPage": "https://www.electricien-marcillat.fr/blog/[REMPLACER:SLUG]/",
+        "articleSection": "[REMPLACER:CATEGORIE]",
+        "keywords": ["[REMPLACER:KW1]", "[REMPLACER:KW2]", "[REMPLACER:KW3]"]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.electricien-marcillat.fr/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.electricien-marcillat.fr/blog/"},
+            {"@type": "ListItem", "position": 3, "name": "[REMPLACER:TITRE_COURT_BREADCRUMB]", "item": "https://www.electricien-marcillat.fr/blog/[REMPLACER:SLUG]/"}
+        ]
+    }
+    </script>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Aller au contenu principal</a>
+<div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+
+<!-- HEADER (à NE PAS modifier — identique sur tous les articles) -->
+<header class="header" style="position: sticky; top: 0; z-index: 50; background: rgba(253, 253, 253, 0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--ink-10); padding: 0.75rem 0;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+        <a href="/" class="brand" aria-label="Laurent Agnese Électricité Générale · Accueil">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 36px; height: 36px;">
+                    <circle cx="24" cy="24" r="22" fill="#1E9FD9"/>
+                    <path d="M26 8 L14 28 L22 28 L18 40 L34 20 L26 20 Z" fill="#E63946"/>
+                </svg>
+            </span>
+            <span class="brand-text"><strong>Laurent Agnese</strong><em>Électricité Générale · Marcillat</em></span>
+        </a>
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+            <a href="tel:+33649797033" aria-label="Appeler le 06 49 79 70 33" class="btn btn-ghost" style="font-size: 0.88rem;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span class="hide-mobile">06 49 79 70 33</span>
+            </a>
+            <a href="/#devis" class="btn btn-primary" style="font-size: 0.88rem;">Devis gratuit</a>
+        </div>
+    </div>
+</header>
+
+<main id="main" class="blog">
+    <article class="blog-container">
+
+        <!-- ===== HEADER ARTICLE — à modifier ===== -->
+        <header class="article-hero">
+            <span class="article-cat">[REMPLACER:CATEGORIE_VISIBLE]</span>
+            <h1>[REMPLACER:TITRE_H1] : <em>[REMPLACER:SOUS_TITRE_ITALIQUE].</em></h1>
+            <p class="article-lead">[REMPLACER:CHAPEAU_INTRODUCTIF_2_4_PHRASES]</p>
+            <div class="article-meta">
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Par Laurent Agnese</span>
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>[REMPLACER:DATE_FR]</span>
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>[REMPLACER:X] min de lecture</span>
+            </div>
+        </header>
+
+        <!-- ===== BODY ARTICLE — réécrire complètement ===== -->
+        <div class="article-body">
+
+            <p>[REMPLACER:PARAGRAPHE_INTRO]</p>
+
+            <!-- Bloc info bleu — à utiliser pour les définitions/key takeaways -->
+            <div class="info-box">
+                <strong>Bon à savoir</strong>
+                <p>[REMPLACER:INFO_IMPORTANTE]</p>
+            </div>
+
+            <h2>[REMPLACER:H2_SECTION_1]</h2>
+            <p>[REMPLACER:PARAGRAPHE]</p>
+
+            <h3>[REMPLACER:H3_SOUS_SECTION]</h3>
+            <p>[REMPLACER:PARAGRAPHE]</p>
+
+            <ul>
+                <li><strong>[REMPLACER:POINT_FORT]</strong> : explication.</li>
+                <li><strong>[REMPLACER:POINT_FORT]</strong> : explication.</li>
+            </ul>
+
+            <h2>[REMPLACER:H2_SECTION_2]</h2>
+            <p>[REMPLACER:PARAGRAPHE]</p>
+
+            <!-- Bloc avertissement rouge — pour les pièges/dangers -->
+            <div class="warning-box">
+                <strong>Attention</strong>
+                <p>[REMPLACER:AVERTISSEMENT]</p>
+            </div>
+
+        </div>
+
+        <!-- ===== CTA milieu d'article — à personnaliser ===== -->
+        <aside class="article-cta">
+            <h3>[REMPLACER:TITRE_CTA]</h3>
+            <p>[REMPLACER:ACCROCHE_CTA]</p>
+            <a href="/#devis" class="btn btn-primary">Demander un devis gratuit</a>
+        </aside>
+
+        <div class="article-body">
+
+            <h2>[REMPLACER:H2_SECTION_3]</h2>
+            <p>[REMPLACER:CONCLUSION_AVEC_MENTION_LOCALE]</p>
+
+        </div>
+
+        <!-- ===== Bouton retour + share (à ne pas modifier sauf URLs) ===== -->
+        <footer class="article-footer">
+            <a href="/blog/" class="article-back">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                Retour aux articles
+            </a>
+            <div class="article-share">
+                <span class="article-share-label">Partager cet article :</span>
+                <div class="article-share-buttons">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.electricien-marcillat.fr/blog/[REMPLACER:SLUG]/" target="_blank" rel="noopener" aria-label="Partager sur Facebook">Facebook</a>
+                    <a href="https://wa.me/?text=https://www.electricien-marcillat.fr/blog/[REMPLACER:SLUG]/" target="_blank" rel="noopener" aria-label="Partager sur WhatsApp">WhatsApp</a>
+                    <a href="mailto:?subject=[REMPLACER:SUJET_EMAIL]&body=Article%20utile%20:%20https://www.electricien-marcillat.fr/blog/[REMPLACER:SLUG]/" aria-label="Partager par email">Email</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- ===== Articles liés — choisir 2 articles existants ===== -->
+        <section class="article-related">
+            <h2>Sur le même thème</h2>
+            <div class="article-related-grid">
+                <a href="../[REMPLACER:AUTRE_ARTICLE_SLUG_1]/" class="blog-card">
+                    <div class="blog-card-thumb">
+                        <div class="blog-card-thumb-pattern"></div>
+                        <span class="blog-card-cat">[CATEGORIE]</span>
+                    </div>
+                    <div class="blog-card-body">
+                        <h2>[TITRE_ARTICLE_RELATED_1]</h2>
+                        <p>[ACCROCHE_COURTE]</p>
+                    </div>
+                </a>
+                <a href="../[REMPLACER:AUTRE_ARTICLE_SLUG_2]/" class="blog-card">
+                    <div class="blog-card-thumb">
+                        <div class="blog-card-thumb-pattern"></div>
+                        <span class="blog-card-cat">[CATEGORIE]</span>
+                    </div>
+                    <div class="blog-card-body">
+                        <h2>[TITRE_ARTICLE_RELATED_2]</h2>
+                        <p>[ACCROCHE_COURTE]</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+    </article>
+</main>
+
+<!-- FOOTER (identique à ne pas modifier) -->
+<footer class="footer" role="contentinfo" style="margin-top: 4rem;">
+    <div class="container footer-grid">
+        <div class="footer-brand">
+            <div class="brand footer-brand-inner">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="22" fill="#1E9FD9"/><path d="M26 8 L14 28 L22 28 L18 40 L34 20 L26 20 Z" fill="#E63946"/></svg>
+                </span>
+                <span class="brand-text"><strong>Laurent Agnese</strong><em>Électricité Générale · Marcillat</em></span>
+            </div>
+            <p>Artisan électricien en Combraille depuis 1997. Devis gratuit, dépannage 7j/7, intervention dans tout l'Allier sud.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Navigation</h4>
+            <ul>
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/#services">Services</a></li>
+                <li><a href="/#realisations">Réalisations</a></li>
+                <li><a href="/#avis">Avis clients</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/#devis">Devis gratuit</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <ul>
+                <li><a href="tel:+33649797033" aria-label="Appeler le 06 49 79 70 33">06 49 79 70 33</a></li>
+                <li><a href="mailto:elecgenerale.laurentagnese@gmail.com">elecgenerale.laurentagnese<br>@gmail.com</a></li>
+                <li>Bournet<br>03420 Marcillat-en-Combraille</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-base">
+        <div class="container footer-base-inner">
+            <p>© 2026 Laurent Agnese Électricité Générale · SIREN 847 545 803 · Tous droits réservés</p>
+            <p class="footer-legal">
+                <a href="/#mentions">Mentions légales</a> ·
+                <a href="/#rgpd">RGPD</a> ·
+                <span>Site conçu par <a href="https://www.axyosagency.com/" target="_blank" rel="noopener">Axyos Agency</a></span>
+            </p>
+        </div>
+    </div>
+</footer>
+
+<script>
+(() => {
+    const bar = document.getElementById('readingProgress');
+    const article = document.querySelector('.article-body');
+    if (!bar || !article) return;
+    const onScroll = () => {
+        const rect = article.getBoundingClientRect();
+        const total = article.offsetHeight - window.innerHeight;
+        const read = -rect.top;
+        const ratio = Math.max(0, Math.min(1, read / total));
+        bar.style.transform = `scaleX(${ratio})`;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+})();
+</script>
+
+</body>
+</html>
